@@ -15,28 +15,28 @@ Users will be able to save their NFC profiles to a custom server.
 
 When users start the app for the first time a slideshow will appear:
 
-![slideshow](/home/jonas/_Data/HTL/3Klasse/POS/android-projekt/NFCApp/graphics-sketch/slideshow.png)
+![slideshow](graphics-sketch/slideshow.png)
 
 ### Profiles Tab
 
-![profiles](/home/jonas/_Data/HTL/3Klasse/POS/android-projekt/NFCApp/graphics-sketch/profiles.png)
+![profiles](graphics-sketch/profiles.png)
 
 *Profiles Main Screen*
 
-![profile-detail](/home/jonas/_Data/HTL/3Klasse/POS/android-projekt/NFCApp/graphics-sketch/profile-detail.png)
+![profile-detail](graphics-sketch/profile-detail.png)
 
 *Profile Detail Screen*
 
-![custom-profile](/home/jonas/_Data/HTL/3Klasse/POS/android-projekt/NFCApp/graphics-sketch/custom-profile.png)
+![custom-profile](graphics-sketch/custom-profile.png)
 
 *Custom Profile Screen*
 
 ### Scan Tab
 
-![scan-1](/home/jonas/_Data/HTL/3Klasse/POS/android-projekt/NFCApp/graphics-sketch/scan-1.png)
+![scan-1](graphics-sketch/scan-1.png)
 
-![scan-2](/home/jonas/_Data/HTL/3Klasse/POS/android-projekt/NFCApp/graphics-sketch/scan-2.png)
+![scan-2](graphics-sketch/scan-2.png)
 
 ### Settings Tab
 
-![settings](/home/jonas/_Data/HTL/3Klasse/POS/android-projekt/NFCApp/graphics-sketch/settings.png)
+![settings](graphics-sketch/settings.png)
