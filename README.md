@@ -13,10 +13,10 @@ With this app it will be possible to
 Users will furthermore be able to save their NFC profiles to a server.
 
 ## Design
-Design doc can be found [here](project-proposal.md)
+Design doc can be found [here](project-proposal.md).
 
 ## Tasks
-See gitlab [issues](https://gitlab.com/_cicero/NFCApp/-/boards)
+See gitlab [issues](https://gitlab.com/_cicero/NFCApp/-/boards) for current status or [project plan]( project-plan.png) for status at project start.
 
 ## License
-[GNU General Public License v3.0](license)
+[GNU General Public License v3.0](LICENSE).
