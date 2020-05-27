@@ -3,17 +3,17 @@
 
     <item
         android:id="@+id/navigation_home"
-        android:icon="@android:drawable/sym_contact_card"
-        android:title="@string/title_profiles" />
+        android:icon="@drawable/icons8_credit_card_96"
+        android:title="@string/title_tags" />
 
     <item
         android:id="@+id/navigation_dashboard"
-        android:icon="@android:drawable/stat_notify_sync"
+        android:icon="@drawable/icons8_nfc_96"
         android:title="@string/title_scan" />
 
     <item
         android:id="@+id/navigation_notifications"
-        android:icon="@android:drawable/ic_menu_preferences"
+        android:icon="@drawable/icons8_settings"
         android:title="@string/title_settings" />
 
 </menu>
