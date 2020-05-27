@@ -13,4 +13,6 @@
     <string name="scan_data_format">Data format</string>
     <string name="scan_tag_name">Tag name</string>
     <string name="tags_no_nfc_tags_yet">No NFC tags scanned  yet</string>
+    <string name="export">export</string>
+    <string name="write_to_tag">write to tag</string>
 </resources>
