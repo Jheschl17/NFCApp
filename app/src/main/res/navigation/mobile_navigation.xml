@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/navigation_home"
         android:name="net.htlgrieskirchen.at.jeschl17.nfcdroid.ui.tags.TagsFragment"
-        android:label="@string/title_profiles"
-        tools:layout="@layout/fragment_Tags" />
+        android:label="@string/title_tags"
+        tools:layout="@layout/fragment_tags" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
