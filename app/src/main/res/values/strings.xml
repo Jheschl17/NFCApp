@@ -26,8 +26,7 @@
     <!-- Sync Preferences -->
     <string name="sync_title">Sync email periodically</string>
     <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails</string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="appearance">Appearance</string>
     <string name="theme">Theme</string>
@@ -41,4 +40,9 @@
     <string name="add_record">Add a record</string>
     <string name="more_options">More options</string>
     <string name="save">Save</string>
+    <string name="nfc_logo_description">NFC logo</string>
+    <string name="nfc_disabled">It seems like NFC is not currently enabled\n\nTo use most features this App provides, you should enable NFC</string>
+    <string name="nfc_not_available">It seems like your device does not support NFC</string>
+    <string name="nfc_disabled_title">NFC Disabled</string>
+    <string name="nfc_not_available_title">NFC Not Supported</string>
 </resources>
