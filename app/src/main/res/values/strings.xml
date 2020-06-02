@@ -37,6 +37,9 @@
     <string name="history">History</string>
     <string name="rate_this_app">Rate this App</string>
     <string name="icons">Icons kindly provided by Icons8</string>
+    <string name="add_record">Add a record</string>
+    <string name="more_options">More options</string>
+    <string name="save">Save</string>
     <string name="nfc_logo_description">NFC logo</string>
     <string name="nfc_disabled">It seems like NFC is not currently enabled\n\nTo use most features this App provides, you should enable NFC</string>
     <string name="nfc_not_available">It seems like your device does not support NFC</string>
