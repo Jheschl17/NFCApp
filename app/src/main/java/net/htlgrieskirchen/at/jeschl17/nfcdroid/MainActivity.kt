@@ -1,24 +1,26 @@
 package net.htlgrieskirchen.at.jeschl17.nfcdroid
 
+import android.R.attr.data
+import android.R.attr.tag
 import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.nfc.NfcAdapter
-import android.nfc.NfcManager
-import android.nfc.Tag
+import android.nfc.*
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.util.showAlertDialog
+import net.htlgrieskirchen.at.jeschl17.nfcdroid.util.writeTag
+import java.nio.charset.Charset
 
 
 class MainActivity : AppCompatActivity() {

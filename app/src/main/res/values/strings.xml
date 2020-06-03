@@ -45,4 +45,14 @@
     <string name="nfc_not_available">It seems like your device does not support NFC</string>
     <string name="nfc_disabled_title">NFC Disabled</string>
     <string name="nfc_not_available_title">NFC Not Supported</string>
+    <string name="nfc_tag_write_protected">This NFC tag is read-only</string>
+    <string name="nfc_tag_write_failed">Write Failed</string>
+    <string name="no_write_description">no writing possible</string>
+    <string name="not_enough_space">The NFC tag does not have enough space to store this</string>
+    <string name="not_enough_storage_description">not enough storage</string>
+    <string name="nfc_writing_successful">Data successfully written</string>
+    <string name="success">success</string>
+    <string name="nfc_write_disconnected">The tag was disconnected during the write process</string>
+    <string name="error_description">error</string>
+    <string name="unknown_error_occured">A unknown error occured</string>
 </resources>
