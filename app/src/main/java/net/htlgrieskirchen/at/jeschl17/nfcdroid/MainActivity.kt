@@ -1,7 +1,5 @@
 package net.htlgrieskirchen.at.jeschl17.nfcdroid
 
-import android.R.attr.data
-import android.R.attr.tag
 import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.content.Context
@@ -12,15 +10,17 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+import net.htlgrieskirchen.at.jeschl17.nfcdroid.ui.scan.ScanFragment
+import net.htlgrieskirchen.at.jeschl17.nfcdroid.ui.settings.SettingsFragment
+import net.htlgrieskirchen.at.jeschl17.nfcdroid.ui.tags.TagsFragment
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.util.showAlertDialog
-import net.htlgrieskirchen.at.jeschl17.nfcdroid.util.writeTag
-import java.nio.charset.Charset
 
 
 class MainActivity : AppCompatActivity() {
@@ -32,18 +32,38 @@ class MainActivity : AppCompatActivity() {
     private lateinit var intentFiltersArray: Array<IntentFilter>
     private lateinit var pendingIntent: PendingIntent
 
+    lateinit var tagsFragment: TagsFragment
+    lateinit var scanFragment: ScanFragment
+    lateinit var settingsFragment: SettingsFragment
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
-        val navController = findNavController(R.id.nav_host_fragment)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications))
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+        // Activate tabs
+        tagsFragment = TagsFragment()
+        scanFragment = ScanFragment()
+        settingsFragment = SettingsFragment()
+
+        supportFragmentManager.beginTransaction()
+            .replace(frag_display.id, tagsFragment)
+            .commit()
+        
+        tab_tags.setOnClickListener {
+            supportFragmentManager.beginTransaction()
+                .replace(frag_display.id, tagsFragment)
+                .commit()
+        }
+        tab_scan.setOnClickListener {
+            supportFragmentManager.beginTransaction()
+                .replace(frag_display.id, scanFragment)
+                .commit()
+        }
+        tab_settings.setOnClickListener {
+            supportFragmentManager.beginTransaction()
+                .replace(frag_display.id, settingsFragment)
+                .commit()
+        }
 
         // Check status of NFC support on device and react accordingly
         nfcManager = getSystemService(Context.NFC_SERVICE) as NfcManager?
