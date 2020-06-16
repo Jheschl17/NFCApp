@@ -13,6 +13,7 @@ import android.view.View
 import android.widget.TextView
 import kotlinx.android.synthetic.main.message_ndef.view.*
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.R
+import net.htlgrieskirchen.at.jeschl17.nfcdroid.SaveTag
 
 fun showAlertDialog(viewId: Int, titleId: Int, context: Context) {
    AlertDialog.Builder(context)
@@ -52,6 +53,55 @@ private fun view(message: NdefRecord, activity: Activity): View {
       text_headline.text = message.toMimeType()
       text_detail.text = message.payload.decodeToString()
    }
+}
+
+/**
+ * Extract data from the given SaveTag object and convert it to its corresponding attribute Views.
+ *
+ * @param saveTag the scanned tag
+ * @param activity a activity which is required for certain operations
+ * @return a list of attribute views according to the given tag object
+ */
+fun attributes(saveTag: SaveTag, activity: Activity): List<View> {
+   val attributes = mutableListOf<View>()
+
+   attributes.add(
+      inflate(R.layout.attribute_headline_details, activity))
+
+   saveTag.tagId?.let {
+      attributes.add(
+         view(it, R.layout.attribute_id, activity))
+   }
+   saveTag.technologies?.let {
+      attributes.add(
+         view(it, R.layout.attribute_technologies, activity))
+   }
+   saveTag.dataFormat?.let {
+      attributes.add(
+         view(it, R.layout.attribute_data_format, activity))
+   }
+   saveTag.memorySpace?.let {
+      attributes.add(
+         view(it, R.layout.attribute_memory_information, activity))
+   }
+   saveTag.atqa?.let {
+      attributes.add(
+         view(it, R.layout.attribute_atqa, activity))
+   }
+   saveTag.sak?.let {
+      attributes.add(
+         view(it, R.layout.attribute_sak, activity))
+   }
+   saveTag.editable?.let {
+      attributes.add(
+         view(it, R.layout.attribute_editable, activity))
+   }
+   saveTag.canMakeReadOnly?.let {
+      attributes.add(
+         view(it, R.layout.attribute_read_only, activity))
+   }
+
+   return attributes
 }
 
 /**
@@ -201,4 +251,19 @@ private fun view(detail: String, layoutId: Int, activity: Activity): View {
 fun dp(dp: Float, context: Context): Int {
    return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.resources.displayMetrics)
       .toInt()
+}
+
+fun toSaveTag(name: String, tag: Tag, ndefMessage: NdefMessage, activity: Activity): SaveTag {
+   return SaveTag(
+      name = name,
+      ndefMessage = ndefMessage,
+      tagId = extractId(tag),
+      technologies = extractTechnologies(tag),
+      dataFormat = extractDataFormat(tag, activity),
+      memorySpace = extractSize(tag, activity),
+      atqa = extractATQA(tag),
+      sak = extractSAK(tag),
+      editable = extractWritable(tag, activity),
+      canMakeReadOnly = extractCanBeMadeReadOnly(tag, activity)
+   )
 }

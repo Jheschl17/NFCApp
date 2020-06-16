@@ -38,7 +38,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Activate tabs
+        // Initialize instance for fragment access
+        instance = this
+
+        // Initialize tabs
         tagsFragment = TagsFragment()
         scanFragment = ScanFragment()
         settingsFragment = SettingsFragment()
@@ -78,7 +81,19 @@ class MainActivity : AppCompatActivity() {
         tab_scan.setOnClickListener {
             supportFragmentManager.beginTransaction()
                 .replace(frag_display.id, scanFragment)
-                .commit()
+                .commitNow()
+
+            // Refresh ScanFragment for when a tag is scanned while ScanFragment tab is opened
+            scanFragment.reset()
+            supportFragmentManager
+                .beginTransaction()
+                .detach(scanFragment)
+                .commitNowAllowingStateLoss()
+            supportFragmentManager
+                .beginTransaction()
+                .attach(scanFragment)
+                .commitAllowingStateLoss()
+
             makeSmall(image_tab_tags)
             makeSmall(text_tab_tags)
             makeBig(image_tab_scan)
@@ -142,7 +157,7 @@ class MainActivity : AppCompatActivity() {
         scanFragment.mode = ScanFragment.Mode.DETAIL
         switchToTabScan()
 
-        Log.i(TAG, tagFromIntent.toString())
+        Log.i(TAG, "caught NFC intent: $tagFromIntent")
     }
 
     fun switchToTabTags() {
@@ -158,3 +173,5 @@ class MainActivity : AppCompatActivity() {
     }
 
 }
+
+lateinit var instance: MainActivity

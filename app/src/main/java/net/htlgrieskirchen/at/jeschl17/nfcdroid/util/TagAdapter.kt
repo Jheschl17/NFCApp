@@ -1,16 +1,21 @@
 package net.htlgrieskirchen.at.jeschl17.nfcdroid.util
 
+import android.app.Activity
+import android.content.Intent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ListAdapter
-import android.widget.ArrayAdapter
 import android.widget.BaseAdapter
+import kotlinx.android.synthetic.main.tag.view.*
+import net.htlgrieskirchen.at.jeschl17.nfcdroid.R
+import net.htlgrieskirchen.at.jeschl17.nfcdroid.SaveTag
+import net.htlgrieskirchen.at.jeschl17.nfcdroid.ui.tags.TagDetails
 
 class TagAdapter(
-    private val items: List<View>
+    private val items: List<SaveTag>,
+    private val activity: Activity
 ) : BaseAdapter() {
 
-    override fun getItem(position: Int): View {
+    override fun getItem(position: Int): SaveTag {
         return items[position]
     }
 
@@ -23,7 +28,18 @@ class TagAdapter(
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        return items[position]
+        return activity.layoutInflater.inflate(R.layout.tag, null).apply {
+            val item = getItem(position)
+
+            text_name.text = item.name
+            text_id.text = item.tagId
+            text_technologies.text = item.technologies
+
+            setOnClickListener {
+                val intent = Intent(activity, TagDetails::class.java).putExtra("saveTag", item)
+                activity.startActivity(intent)
+            }
+        }
     }
 
 }

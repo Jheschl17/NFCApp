@@ -77,4 +77,6 @@
     <string name="save_tag">Save tag</string>
     <string name="tag_details">Tag details</string>
     <string name="tag_data">Tag data</string>
+    <string name="name_required">You have to specify a name to save this tag</string>
+    <string name="emulate">Emulate</string>
 </resources>

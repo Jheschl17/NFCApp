@@ -8,5 +8,7 @@ class CustomProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.acticvity_custom_profile)
+
+
     }
 }
