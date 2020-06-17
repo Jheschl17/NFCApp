@@ -7,9 +7,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="scan_tap_message">Tap a NFC tag against the phone</string>
-    <string name="scan_tag_type">Tag type:</string>
+    <string name="scan_tag_type">Tag type</string>
     <string name="scan_technologies">Technologies</string>
-    <string name="scan_memory_information">Memory information</string>
+    <string name="scan_memory_information">Memory space</string>
     <string name="scan_data_format">Data format</string>
     <string name="scan_tag_name">Tag name</string>
     <string name="tags_no_nfc_tags_yet">No NFC tags scanned  yet</string>
@@ -55,4 +55,26 @@
     <string name="nfc_write_disconnected">The tag was disconnected during the write process</string>
     <string name="error_description">error</string>
     <string name="unknown_error_occured">A unknown error occured</string>
+    <string name="memory_information">Memory space</string>
+    <string name="tag_id">Tag ID</string>
+    <string name="org.nfcorum.ndef.type1">NFC Forum Type 1</string>
+    <string name="org.nfcorum.ndef.type2">NFC Forum Type 2</string>
+    <string name="org.nfcorum.ndef.type3">NFC Forum Type 3</string>
+    <string name="org.nfcorum.ndef.type4">NFC Forum Type 4</string>
+    <string name="com.nxp.ndef.mifareclassic">MIFARE Classic</string>
+    <string name="com.nxp.ndef.icodesli">iCODE SLI</string>
+    <string name="android.ndef.unknown">Unknown</string>
+    <string name="writable">Editable</string>
+    <string name="not_writable">Not editable</string>
+    <string name="bytes">bytes</string>
+    <string name="atqa">ATQA</string>
+    <string name="a_image">a image</string>
+    <string name="sak">SAK</string>
+    <string name="editable">Editable</string>
+    <string name="can_make_read_only">Can be made read-only</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="save_tag">Save tag</string>
+    <string name="tag_details">Tag details</string>
+    <string name="tag_data">Tag data</string>
 </resources>
