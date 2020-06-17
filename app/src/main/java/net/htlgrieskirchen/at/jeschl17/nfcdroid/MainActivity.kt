@@ -1,26 +1,24 @@
 package net.htlgrieskirchen.at.jeschl17.nfcdroid
 
-import android.R.attr.data
-import android.R.attr.tag
 import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.graphics.Typeface
 import android.nfc.*
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
+import android.util.TypedValue
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+import net.htlgrieskirchen.at.jeschl17.nfcdroid.ui.scan.ScanFragment
+import net.htlgrieskirchen.at.jeschl17.nfcdroid.ui.settings.SettingsFragment
+import net.htlgrieskirchen.at.jeschl17.nfcdroid.ui.tags.TagsFragment
+import net.htlgrieskirchen.at.jeschl17.nfcdroid.util.dp
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.util.showAlertDialog
-import net.htlgrieskirchen.at.jeschl17.nfcdroid.util.writeTag
-import java.nio.charset.Charset
 
 
 class MainActivity : AppCompatActivity() {
@@ -32,18 +30,89 @@ class MainActivity : AppCompatActivity() {
     private lateinit var intentFiltersArray: Array<IntentFilter>
     private lateinit var pendingIntent: PendingIntent
 
+    lateinit var tagsFragment: TagsFragment
+    lateinit var scanFragment: ScanFragment
+    lateinit var settingsFragment: SettingsFragment
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
-        val navController = findNavController(R.id.nav_host_fragment)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications))
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+        // Initialize instance for fragment access
+        instance = this
+
+        // Initialize tabs
+        tagsFragment = TagsFragment()
+        scanFragment = ScanFragment()
+        settingsFragment = SettingsFragment()
+
+        supportFragmentManager.beginTransaction()
+            .replace(frag_display.id, tagsFragment)
+            .commit()
+
+        fun makeBig(view: ImageView) {
+            view.layoutParams.width = dp(35f, this)
+            view.layoutParams.height = dp(35f, this)
+        }
+        fun makeBig(view: TextView) {
+            view.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16f)
+            view.setTypeface(null, Typeface.BOLD)
+        }
+        fun makeSmall(view: ImageView) {
+            view.layoutParams.width = dp(30f, this)
+            view.layoutParams.height = dp(30f, this)
+        }
+        fun makeSmall(view: TextView) {
+            view.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14f)
+            view.setTypeface(null, Typeface.NORMAL)
+        }
+        tab_tags.setOnClickListener {
+            image_tab_tags.height
+            supportFragmentManager.beginTransaction()
+                .replace(frag_display.id, tagsFragment)
+                .commit()
+            makeBig(image_tab_tags)
+            makeBig(text_tab_tags)
+            makeSmall(image_tab_scan)
+            makeSmall(text_tab_scan)
+            makeSmall(image_tab_settings)
+            makeSmall(text_tab_settings)
+        }
+        tab_scan.setOnClickListener {
+            supportFragmentManager.beginTransaction()
+                .replace(frag_display.id, scanFragment)
+                .commitNow()
+
+            // Refresh ScanFragment for when a tag is scanned while ScanFragment tab is opened
+            scanFragment.reset()
+            supportFragmentManager
+                .beginTransaction()
+                .detach(scanFragment)
+                .commitNowAllowingStateLoss()
+            supportFragmentManager
+                .beginTransaction()
+                .attach(scanFragment)
+                .commitAllowingStateLoss()
+
+            makeSmall(image_tab_tags)
+            makeSmall(text_tab_tags)
+            makeBig(image_tab_scan)
+            makeBig(text_tab_scan)
+            makeSmall(image_tab_settings)
+            makeSmall(text_tab_settings)
+        }
+        tab_settings.setOnClickListener {
+            supportFragmentManager.beginTransaction()
+                .replace(frag_display.id, settingsFragment)
+                .commit()
+            makeSmall(image_tab_tags)
+            makeSmall(text_tab_tags)
+            makeSmall(image_tab_scan)
+            makeSmall(text_tab_scan)
+            makeBig(image_tab_settings)
+            makeBig(text_tab_settings)
+        }
+        tab_tags.callOnClick()
 
         // Check status of NFC support on device and react accordingly
         nfcManager = getSystemService(Context.NFC_SERVICE) as NfcManager?
@@ -72,17 +141,37 @@ class MainActivity : AppCompatActivity() {
 
     public override fun onResume() {
         super.onResume()
-        nfcAdapter!!.enableForegroundDispatch(this, pendingIntent, intentFiltersArray, null)
+        nfcAdapter?.enableForegroundDispatch(this, pendingIntent, intentFiltersArray, null)
     }
 
     @SuppressLint("MissingSuperCall")
     public override fun onNewIntent(intent: Intent) {
         val tagFromIntent: Tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG)
-        Toast.makeText(this, "dispatch", Toast.LENGTH_LONG).show()
-        nav_view.menu.findItem(R.id.navigation_dashboard).isChecked = true
-        nav_view.menu.performIdentifierAction(R.id.navigation_dashboard, 0)
-        
-        Log.i(TAG, tagFromIntent.toString())
+
+        // Switch to scan tab and modify scan fragment
+        intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)?.also { rawMessages ->
+            val messages: List<NdefMessage> = rawMessages.map { it as NdefMessage }
+            scanFragment.rawMessage = messages.first()
+        }
+        scanFragment.tag = tagFromIntent
+        scanFragment.mode = ScanFragment.Mode.DETAIL
+        switchToTabScan()
+
+        Log.i(TAG, "caught NFC intent: $tagFromIntent")
+    }
+
+    fun switchToTabTags() {
+        tab_tags.callOnClick()
+    }
+
+    fun switchToTabScan() {
+       tab_scan.callOnClick()
+    }
+
+    fun switchToTabSettings() {
+        tab_settings.callOnClick()
     }
 
 }
+
+lateinit var instance: MainActivity
