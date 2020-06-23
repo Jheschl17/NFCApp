@@ -21,7 +21,7 @@ class TagDetails : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tag_details)
 
-        val saveTag = intent.getParcelableExtra<NfcTag>("saveTag")
+        val saveTag = intent.getSerializableExtra("saveTag") as NfcTag
 
         text_tag_name.text = saveTag.name
         items.addAll(attributes(saveTag, this))
