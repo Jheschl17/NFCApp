@@ -13,7 +13,7 @@ import android.view.View
 import android.widget.TextView
 import kotlinx.android.synthetic.main.message_ndef.view.*
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.R
-import net.htlgrieskirchen.at.jeschl17.nfcdroid.db.SaveTag
+import net.htlgrieskirchen.at.jeschl17.nfcdroid.db.NfcTag
 
 fun showAlertDialog(viewId: Int, titleId: Int, context: Context) {
    AlertDialog.Builder(context)
@@ -58,45 +58,45 @@ private fun view(message: NdefRecord, activity: Activity): View {
 /**
  * Extract data from the given SaveTag object and convert it to its corresponding attribute Views.
  *
- * @param saveTag the scanned tag
+ * @param nfcTag the scanned tag
  * @param activity a activity which is required for certain operations
  * @return a list of attribute views according to the given tag object
  */
-fun attributes(saveTag: SaveTag, activity: Activity): List<View> {
+fun attributes(nfcTag: NfcTag, activity: Activity): List<View> {
    val attributes = mutableListOf<View>()
 
    attributes.add(
       inflate(R.layout.attribute_headline_details, activity))
 
-   saveTag.tagId?.let {
+   nfcTag.tagId?.let {
       attributes.add(
          view(it, R.layout.attribute_id, activity))
    }
-   saveTag.technologies?.let {
+   nfcTag.technologies?.let {
       attributes.add(
          view(it, R.layout.attribute_technologies, activity))
    }
-   saveTag.dataFormat?.let {
+   nfcTag.dataFormat?.let {
       attributes.add(
          view(it, R.layout.attribute_data_format, activity))
    }
-   saveTag.memorySpace?.let {
+   nfcTag.memorySpace?.let {
       attributes.add(
          view(it, R.layout.attribute_memory_information, activity))
    }
-   saveTag.atqa?.let {
+   nfcTag.atqa?.let {
       attributes.add(
          view(it, R.layout.attribute_atqa, activity))
    }
-   saveTag.sak?.let {
+   nfcTag.sak?.let {
       attributes.add(
          view(it, R.layout.attribute_sak, activity))
    }
-   saveTag.editable?.let {
+   nfcTag.editable?.let {
       attributes.add(
          view(it, R.layout.attribute_editable, activity))
    }
-   saveTag.canMakeReadOnly?.let {
+   nfcTag.canMakeReadOnly?.let {
       attributes.add(
          view(it, R.layout.attribute_read_only, activity))
    }
@@ -253,8 +253,8 @@ fun dp(dp: Float, context: Context): Int {
       .toInt()
 }
 
-fun toSaveTag(name: String, tag: Tag, ndefMessage: NdefMessage?, activity: Activity): SaveTag {
-   return SaveTag(
+fun toSaveTag(name: String, tag: Tag, ndefMessage: NdefMessage?, activity: Activity): NfcTag {
+   return NfcTag(
        name = name,
        ndefMessage = ndefMessage,
        tagId = extractId(tag),

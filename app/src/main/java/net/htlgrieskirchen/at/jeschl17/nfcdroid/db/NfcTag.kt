@@ -5,7 +5,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-class SaveTag(
+class NfcTag(
     val name: String,
     val ndefMessage: NdefMessage?,
     val tagId: String?,

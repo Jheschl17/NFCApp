@@ -7,15 +7,15 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import kotlinx.android.synthetic.main.tag.view.*
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.R
-import net.htlgrieskirchen.at.jeschl17.nfcdroid.db.SaveTag
+import net.htlgrieskirchen.at.jeschl17.nfcdroid.db.NfcTag
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.ui.tags.TagDetails
 
 class TagAdapter(
-    private val items: List<SaveTag>,
+    private val items: List<NfcTag>,
     private val activity: Activity
 ) : BaseAdapter() {
 
-    override fun getItem(position: Int): SaveTag {
+    override fun getItem(position: Int): NfcTag {
         return items[position]
     }
 

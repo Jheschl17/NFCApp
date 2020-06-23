@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_tags.view.*
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.R
-import net.htlgrieskirchen.at.jeschl17.nfcdroid.db.SaveTag
+import net.htlgrieskirchen.at.jeschl17.nfcdroid.db.NfcTag
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.util.TagAdapter
 
 /**
@@ -17,7 +17,7 @@ import net.htlgrieskirchen.at.jeschl17.nfcdroid.util.TagAdapter
 class TagsFragment : Fragment() {
 
     lateinit var adapter: TagAdapter
-    val tags = mutableListOf<SaveTag>()
+    val tags = mutableListOf<NfcTag>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
