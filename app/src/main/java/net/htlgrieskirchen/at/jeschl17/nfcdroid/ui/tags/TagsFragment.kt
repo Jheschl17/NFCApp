@@ -6,11 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.fragment_tags.*
 import kotlinx.android.synthetic.main.fragment_tags.view.*
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.R
-import net.htlgrieskirchen.at.jeschl17.nfcdroid.SaveTag
-import net.htlgrieskirchen.at.jeschl17.nfcdroid.util.GenericAdapter
+import net.htlgrieskirchen.at.jeschl17.nfcdroid.db.SaveTag
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.util.TagAdapter
 
 /**

@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.View
 import kotlinx.android.synthetic.main.activity_tag_details.*
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.R
-import net.htlgrieskirchen.at.jeschl17.nfcdroid.SaveTag
+import net.htlgrieskirchen.at.jeschl17.nfcdroid.db.SaveTag
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.util.GenericAdapter
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.util.attributes
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.util.records
@@ -25,7 +25,7 @@ class TagDetails : AppCompatActivity() {
 
         text_tag_name.text = saveTag.name
         items.addAll(attributes(saveTag, this))
-        items.addAll(records(saveTag.ndefMessage.records, this))
+        items.addAll(records(saveTag.ndefMessage?.records, this))
 
         adapter = GenericAdapter(items)
         list.adapter = adapter

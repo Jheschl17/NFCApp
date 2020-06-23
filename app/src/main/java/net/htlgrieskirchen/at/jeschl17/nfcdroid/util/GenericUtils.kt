@@ -13,7 +13,7 @@ import android.view.View
 import android.widget.TextView
 import kotlinx.android.synthetic.main.message_ndef.view.*
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.R
-import net.htlgrieskirchen.at.jeschl17.nfcdroid.SaveTag
+import net.htlgrieskirchen.at.jeschl17.nfcdroid.db.SaveTag
 
 fun showAlertDialog(viewId: Int, titleId: Int, context: Context) {
    AlertDialog.Builder(context)
@@ -36,13 +36,13 @@ fun ByteArray.toHexString() : String {
 }
 
 @ExperimentalStdlibApi
-fun records(rawRecords: Array<NdefRecord>, activity: Activity): List<View> {
+fun records(rawRecords: Array<NdefRecord>?, activity: Activity): List<View> {
    val messages = mutableListOf<View>()
 
    messages.add(
       inflate(R.layout.attribute_headline_data, activity))
 
-   rawRecords.forEach { messages.add(view(it, activity)) }
+   rawRecords?.forEach { messages.add(view(it, activity)) }
 
    return messages
 }
@@ -253,17 +253,17 @@ fun dp(dp: Float, context: Context): Int {
       .toInt()
 }
 
-fun toSaveTag(name: String, tag: Tag, ndefMessage: NdefMessage, activity: Activity): SaveTag {
+fun toSaveTag(name: String, tag: Tag, ndefMessage: NdefMessage?, activity: Activity): SaveTag {
    return SaveTag(
-      name = name,
-      ndefMessage = ndefMessage,
-      tagId = extractId(tag),
-      technologies = extractTechnologies(tag),
-      dataFormat = extractDataFormat(tag, activity),
-      memorySpace = extractSize(tag, activity),
-      atqa = extractATQA(tag),
-      sak = extractSAK(tag),
-      editable = extractWritable(tag, activity),
-      canMakeReadOnly = extractCanBeMadeReadOnly(tag, activity)
+       name = name,
+       ndefMessage = ndefMessage,
+       tagId = extractId(tag),
+       technologies = extractTechnologies(tag),
+       dataFormat = extractDataFormat(tag, activity),
+       memorySpace = extractSize(tag, activity),
+       atqa = extractATQA(tag),
+       sak = extractSAK(tag),
+       editable = extractWritable(tag, activity),
+       canMakeReadOnly = extractCanBeMadeReadOnly(tag, activity)
    )
 }

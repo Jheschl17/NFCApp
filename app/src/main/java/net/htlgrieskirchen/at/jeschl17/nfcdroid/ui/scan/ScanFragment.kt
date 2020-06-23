@@ -14,7 +14,6 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_scan.view.*
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.R
-import net.htlgrieskirchen.at.jeschl17.nfcdroid.SaveTag
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.instance
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.util.GenericAdapter
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.util.attributes
@@ -25,7 +24,7 @@ class ScanFragment : Fragment() {
 
     private lateinit var layout: View
 
-    lateinit var rawMessage: NdefMessage
+    var rawMessage: NdefMessage? = null
     private val messages = mutableListOf<View>()
     private val attributes = mutableListOf<View>()
 
@@ -57,10 +56,11 @@ class ScanFragment : Fragment() {
                 return@setOnClickListener
             }
             val tag = toSaveTag(
-                layout.text_tag_name.text.toString(),
-                tag,
-                rawMessage,
-                requireActivity())
+                name = layout.text_tag_name.text.toString(),
+                tag = tag,
+                ndefMessage = rawMessage,
+                activity = requireActivity()
+            )
             // Hide keyboard
             requireActivity().currentFocus?.let { v ->
                 val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
@@ -85,7 +85,7 @@ class ScanFragment : Fragment() {
         if (mode == Mode.DETAIL)
             setModeDetail(
                 attributes(tag!!, requireActivity()),
-                records(rawMessage.records, requireActivity()))
+                records(rawMessage?.records, requireActivity()))
 
         return layout
     }

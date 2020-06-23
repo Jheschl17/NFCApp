@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import kotlinx.android.synthetic.main.tag.view.*
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.R
-import net.htlgrieskirchen.at.jeschl17.nfcdroid.SaveTag
+import net.htlgrieskirchen.at.jeschl17.nfcdroid.db.SaveTag
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.ui.tags.TagDetails
 
 class TagAdapter(
