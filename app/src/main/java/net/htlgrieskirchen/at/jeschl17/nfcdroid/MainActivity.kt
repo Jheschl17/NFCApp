@@ -84,7 +84,6 @@ class MainActivity : AppCompatActivity() {
                 .commitNow()
 
             // Refresh ScanFragment for when a tag is scanned while ScanFragment tab is opened
-            scanFragment.reset()
             supportFragmentManager
                 .beginTransaction()
                 .detach(scanFragment)
