@@ -44,6 +44,9 @@ fun records(rawRecords: Array<NdefRecord>?, activity: Activity): List<View> {
 
    rawRecords?.forEach { messages.add(view(it, activity)) }
 
+   if (messages.size == 1)
+      messages.add(inflate(R.layout.attribute_no_data, activity))
+
    return messages
 }
 

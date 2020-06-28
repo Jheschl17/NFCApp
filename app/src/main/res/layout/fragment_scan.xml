@@ -42,16 +42,30 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
         <Button
             android:id="@+id/button_save_tag"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:text="@string/save_tag"
-            android:focusableInTouchMode="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_tag-name" />
+
+        <EditText
+            android:id="@+id/text_button_error"
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:layout_marginBottom="24dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="error display"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toBottomOf="@+id/button_save_tag"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ListView
             android:id="@+id/list"

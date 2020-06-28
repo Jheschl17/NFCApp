@@ -24,7 +24,6 @@ class TagDetailsActivity : AppCompatActivity() {
         val saveTag = intent.getParcelableExtra<NfcTag>("saveTag")
 
         text_tag_name.text = saveTag.name
-        items.addAll(attributes(saveTag, this))
         items.addAll(records(saveTag.ndefMessage?.records, this))
 
         adapter = GenericAdapter(items)

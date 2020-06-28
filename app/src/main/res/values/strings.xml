@@ -80,5 +80,6 @@
     <string name="name_required">You must specify a name to save this tag</string>
     <string name="emulate">Emulate</string>
     <string name="name_must_be_unique">There already exists a Tag with this name</string>
-    <string name="tag_must_not_be_empty">The Tag must not be empty</string>
+    <string name="tag_must_not_be_empty">A Tag must contain data in order to be saved</string>
+    <string name="no_data_found">No data found</string>
 </resources>
