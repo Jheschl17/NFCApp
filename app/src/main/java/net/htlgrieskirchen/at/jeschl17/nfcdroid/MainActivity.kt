@@ -160,6 +160,16 @@ class MainActivity : AppCompatActivity() {
         Log.i(TAG, "caught NFC intent: $tagFromIntent")
     }
 
+    override fun onBackPressed() {
+        val currentFrag = supportFragmentManager.findFragmentById(frag_display.id)
+        if (currentFrag is ScanFragment && currentFrag.mode == ScanFragment.Mode.DETAIL) {
+            scanFragment.mode = ScanFragment.Mode.SCAN
+            switchToTabScan()
+        } else {
+            super.onBackPressed()
+        }
+    }
+
     fun switchToTabTags() {
         tab_tags.callOnClick()
     }
