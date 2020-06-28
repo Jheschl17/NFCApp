@@ -56,13 +56,15 @@ class Converters {
 
     @TypeConverter
     fun byteArrayToNdefMessage(byteArray: ByteArray?): NdefMessage? {
-        return NdefMessage(byteArray)
+        return byteArray?.let {
+            NdefMessage(it)
+        }
     }
 }
 
 @Database(entities = [NfcTag::class], version = 1)
 @TypeConverters(Converters::class)
-abstract class AppDatabase private constructor() : RoomDatabase() {
+abstract class AppDatabase : RoomDatabase() {
     abstract val nfcTagDao: NfcTagDao?
 
     companion object {
@@ -83,8 +85,9 @@ abstract class AppDatabase private constructor() : RoomDatabase() {
             return Room.databaseBuilder(
                 context,
                 AppDatabase::class.java,
-                DB_NAME
-            ).build()
+                DB_NAME)
+                .allowMainThreadQueries()
+                .build()
         }
     }
 }

@@ -7,16 +7,18 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import kotlinx.android.synthetic.main.tag.view.*
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.R
+import net.htlgrieskirchen.at.jeschl17.nfcdroid.db.AppDatabase
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.db.NfcTag
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.ui.tags.TagDetails
 
 class TagAdapter(
-    private val items: List<NfcTag>,
     private val activity: Activity
 ) : BaseAdapter() {
 
+    private val db = AppDatabase.getInstance(activity).nfcTagDao!!
+
     override fun getItem(position: Int): NfcTag {
-        return items[position]
+        return db.getAll()[position]
     }
 
     override fun getItemId(position: Int): Long {
@@ -24,7 +26,7 @@ class TagAdapter(
     }
 
     override fun getCount(): Int {
-        return items.size
+        return db.getAll().size
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {

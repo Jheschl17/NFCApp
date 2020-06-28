@@ -10,10 +10,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
-import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_scan.view.*
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.R
+import net.htlgrieskirchen.at.jeschl17.nfcdroid.db.AppDatabase
+import net.htlgrieskirchen.at.jeschl17.nfcdroid.db.NfcTagDao
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.instance
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.util.GenericAdapter
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.util.attributes
@@ -21,6 +22,8 @@ import net.htlgrieskirchen.at.jeschl17.nfcdroid.util.records
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.util.toSaveTag
 
 class ScanFragment : Fragment() {
+
+    private lateinit var db: NfcTagDao
 
     private lateinit var layout: View
 
@@ -45,16 +48,27 @@ class ScanFragment : Fragment() {
     ): View? {
         layout = inflater.inflate(R.layout.fragment_scan, container, false)
 
+        db = AppDatabase.getInstance(requireContext()).nfcTagDao!!
+
         // Initialize save button
         layout.button_save_tag.setOnClickListener {
-            if (layout.text_tag_name.text.isEmpty()) {
-                Toast.makeText(
-                    requireActivity(),
-                    requireActivity().getString(R.string.name_required),
-                    Toast.LENGTH_LONG
-                ).show()
+            val tagName = layout.text_tag_name.text.toString()
+            // Check if the tag name is valid (not empty and not already used)
+            if (tagName.isEmpty()) {
+                layout.text_tag_name.requestFocus()
+                layout.text_tag_name.setError(
+                    resources.getString(R.string.name_required),
+                    resources.getDrawable(R.drawable.icons8_error_96, null))
                 return@setOnClickListener
             }
+            if (db.nfcTagByName(tagName) != null) {
+                layout.text_tag_name.requestFocus()
+                layout.text_tag_name.setError(
+                    resources.getString(R.string.name_must_be_unique),
+                    resources.getDrawable(R.drawable.icons8_error_96, null))
+                return@setOnClickListener
+            }
+
             val tag = toSaveTag(
                 name = layout.text_tag_name.text.toString(),
                 tag = tag,
@@ -70,7 +84,7 @@ class ScanFragment : Fragment() {
             // Change mode
             setModeScan()
             mode = Mode.SCAN
-            instance.tagsFragment.tags.add(tag)
+            db.insertAll(tag)
             instance.tab_tags.callOnClick()
         }
 
