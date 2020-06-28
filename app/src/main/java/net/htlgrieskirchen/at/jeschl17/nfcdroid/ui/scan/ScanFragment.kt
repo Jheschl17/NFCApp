@@ -16,10 +16,7 @@ import net.htlgrieskirchen.at.jeschl17.nfcdroid.R
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.db.AppDatabase
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.db.NfcTagDao
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.instance
-import net.htlgrieskirchen.at.jeschl17.nfcdroid.util.GenericAdapter
-import net.htlgrieskirchen.at.jeschl17.nfcdroid.util.attributes
-import net.htlgrieskirchen.at.jeschl17.nfcdroid.util.records
-import net.htlgrieskirchen.at.jeschl17.nfcdroid.util.toSaveTag
+import net.htlgrieskirchen.at.jeschl17.nfcdroid.util.*
 
 class ScanFragment : Fragment() {
 
@@ -53,26 +50,25 @@ class ScanFragment : Fragment() {
         // Initialize save button
         layout.button_save_tag.setOnClickListener {
             val tagName = layout.text_tag_name.text.toString()
-            // Check if the tag name is valid (not empty and not already used)
+            // Check if the tag can be saved
+            // (name is not empty or already used and there is at least one ndef record)
+            if (rawMessage == null) {
+                displayError(resources.getString(R.string.tag_must_not_be_empty), layout.button_save_tag)
+                return@setOnClickListener
+            }
             if (tagName.isEmpty()) {
-                layout.text_tag_name.requestFocus()
-                layout.text_tag_name.setError(
-                    resources.getString(R.string.name_required),
-                    resources.getDrawable(R.drawable.icons8_error_96, null))
+                displayError(resources.getString(R.string.name_required), layout.text_tag_name)
                 return@setOnClickListener
             }
             if (db.nfcTagByName(tagName) != null) {
-                layout.text_tag_name.requestFocus()
-                layout.text_tag_name.setError(
-                    resources.getString(R.string.name_must_be_unique),
-                    resources.getDrawable(R.drawable.icons8_error_96, null))
+                displayError(resources.getString(R.string.name_must_be_unique), layout.text_tag_name)
                 return@setOnClickListener
             }
 
             val tag = toSaveTag(
                 name = layout.text_tag_name.text.toString(),
                 tag = tag,
-                ndefMessage = rawMessage,
+                ndefMessage = rawMessage!!,
                 activity = requireActivity()
             )
             // Hide keyboard
@@ -98,7 +94,7 @@ class ScanFragment : Fragment() {
             setModeScan()
         if (mode == Mode.DETAIL)
             setModeDetail(
-                attributes(tag!!, requireActivity()),
+                attributes(tag, requireActivity()),
                 records(rawMessage?.records, requireActivity()))
 
         return layout

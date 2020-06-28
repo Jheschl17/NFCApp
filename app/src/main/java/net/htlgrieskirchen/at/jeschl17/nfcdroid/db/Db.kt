@@ -12,7 +12,7 @@ import java.io.Serializable
 @Parcelize
 class NfcTag(
     @PrimaryKey val name: String,
-    @ColumnInfo(name = "ndef_message", typeAffinity = ColumnInfo.BLOB) val ndefMessage: NdefMessage?,
+    @ColumnInfo(name = "ndef_message", typeAffinity = ColumnInfo.BLOB) val ndefMessage: NdefMessage,
     @ColumnInfo(name = "tag_id") val tagId: String?,
     @ColumnInfo(name = "technologies") val technologies: String?,
     @ColumnInfo(name = "data_format") val dataFormat: String?,

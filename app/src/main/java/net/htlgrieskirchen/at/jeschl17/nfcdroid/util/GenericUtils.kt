@@ -253,7 +253,7 @@ fun dp(dp: Float, context: Context): Int {
       .toInt()
 }
 
-fun toSaveTag(name: String, tag: Tag, ndefMessage: NdefMessage?, activity: Activity): NfcTag {
+fun toSaveTag(name: String, tag: Tag, ndefMessage: NdefMessage, activity: Activity): NfcTag {
    return NfcTag(
        name = name,
        ndefMessage = ndefMessage,
@@ -266,4 +266,9 @@ fun toSaveTag(name: String, tag: Tag, ndefMessage: NdefMessage?, activity: Activ
        editable = extractWritable(tag, activity),
        canMakeReadOnly = extractCanBeMadeReadOnly(tag, activity)
    )
+}
+
+fun displayError(errorMessage: String, view: TextView) {
+   view.requestFocus()
+   view.error = errorMessage
 }
