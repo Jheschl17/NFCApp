@@ -138,10 +138,6 @@ fun attributes(tag: Tag, activity: Activity): List<View> {
         attributes.add(
             view(it, R.layout.attribute_memory_information, activity))
     }
-    extractTagType(tag)?.let {
-        attributes.add(
-            view(it, R.layout.attribute_tag_type, activity))
-    }
     extractATQA(tag)?.let {
         attributes.add(
             view(it, R.layout.attribute_atqa, activity))
@@ -210,10 +206,6 @@ fun extractSAK(tag: Tag): String? {
         NfcA.get(tag) != null -> NfcA.get(tag).sak.toString()
         else -> null
     }
-}
-
-fun extractTagType(tag: Tag): String? {
-    return null // TODO ?
 }
 
 fun extractSize(tag: Tag, activity: Activity): String? {
