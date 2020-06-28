@@ -18,12 +18,12 @@ import net.htlgrieskirchen.at.jeschl17.nfcdroid.db.NfcTag
 import java.lang.Exception
 
 fun showAlertDialog(viewId: Int, titleId: Int, context: Context) {
-   AlertDialog.Builder(context)
-      .setTitle(titleId)
-      .setView(viewId)
-      .setPositiveButton("Ok", null)
-      .create()
-      .show()
+    AlertDialog.Builder(context)
+        .setTitle(titleId)
+        .setView(viewId)
+        .setPositiveButton("Ok", null)
+        .create()
+        .show()
 }
 
 /**
@@ -32,32 +32,32 @@ fun showAlertDialog(viewId: Int, titleId: Int, context: Context) {
  * @return
  */
 fun ByteArray.toHexString() : String {
-   return this.joinToString(":") {
-      String.format("%02x", it)
-   }
+    return this.joinToString(":") {
+        String.format("%02x", it)
+    }
 }
 
 @ExperimentalStdlibApi
 fun records(rawRecords: Array<NdefRecord>?, activity: Activity): List<View> {
-   val messages = mutableListOf<View>()
+    val messages = mutableListOf<View>()
 
-   messages.add(
-      inflate(R.layout.attribute_headline_data, activity))
+    messages.add(
+        inflate(R.layout.attribute_headline_data, activity))
 
-   rawRecords?.forEach { messages.add(view(it, activity)) }
+    rawRecords?.forEach { messages.add(view(it, activity)) }
 
-   if (messages.size == 1)
-      messages.add(inflate(R.layout.attribute_no_data, activity))
+    if (messages.size == 1)
+        messages.add(inflate(R.layout.attribute_no_data, activity))
 
-   return messages
+    return messages
 }
 
 @ExperimentalStdlibApi
 private fun view(message: NdefRecord, activity: Activity): View {
-   return LayoutInflater.from(activity).inflate(R.layout.message_ndef, null).apply {
-      text_headline.text = message.toMimeType()
-      text_detail.text = message.payload.decodeToString()
-   }
+    return LayoutInflater.from(activity).inflate(R.layout.message_ndef, null).apply {
+        text_headline.text = message.toMimeType()
+        text_detail.text = message.payload.decodeToString()
+    }
 }
 
 /**
@@ -68,45 +68,45 @@ private fun view(message: NdefRecord, activity: Activity): View {
  * @return a list of attribute views according to the given tag object
  */
 fun attributes(nfcTag: NfcTag, activity: Activity): List<View> {
-   val attributes = mutableListOf<View>()
+    val attributes = mutableListOf<View>()
 
-   attributes.add(
-      inflate(R.layout.attribute_headline_details, activity))
+    attributes.add(
+        inflate(R.layout.attribute_headline_details, activity))
 
-   nfcTag.tagId?.let {
-      attributes.add(
-         view(it, R.layout.attribute_id, activity))
-   }
-   nfcTag.technologies?.let {
-      attributes.add(
-         view(it, R.layout.attribute_technologies, activity))
-   }
-   nfcTag.dataFormat?.let {
-      attributes.add(
-         view(it, R.layout.attribute_data_format, activity))
-   }
-   nfcTag.memorySpace?.let {
-      attributes.add(
-         view(it, R.layout.attribute_memory_information, activity))
-   }
-   nfcTag.atqa?.let {
-      attributes.add(
-         view(it, R.layout.attribute_atqa, activity))
-   }
-   nfcTag.sak?.let {
-      attributes.add(
-         view(it, R.layout.attribute_sak, activity))
-   }
-   nfcTag.editable?.let {
-      attributes.add(
-         view(it, R.layout.attribute_editable, activity))
-   }
-   nfcTag.canMakeReadOnly?.let {
-      attributes.add(
-         view(it, R.layout.attribute_read_only, activity))
-   }
+    nfcTag.tagId?.let {
+        attributes.add(
+            view(it, R.layout.attribute_id, activity))
+    }
+    nfcTag.technologies?.let {
+        attributes.add(
+            view(it, R.layout.attribute_technologies, activity))
+    }
+    nfcTag.dataFormat?.let {
+        attributes.add(
+            view(it, R.layout.attribute_data_format, activity))
+    }
+    nfcTag.memorySpace?.let {
+        attributes.add(
+            view(it, R.layout.attribute_memory_information, activity))
+    }
+    nfcTag.atqa?.let {
+        attributes.add(
+            view(it, R.layout.attribute_atqa, activity))
+    }
+    nfcTag.sak?.let {
+        attributes.add(
+            view(it, R.layout.attribute_sak, activity))
+    }
+    nfcTag.editable?.let {
+        attributes.add(
+            view(it, R.layout.attribute_editable, activity))
+    }
+    nfcTag.canMakeReadOnly?.let {
+        attributes.add(
+            view(it, R.layout.attribute_read_only, activity))
+    }
 
-   return attributes
+    return attributes
 }
 
 /**
@@ -117,165 +117,165 @@ fun attributes(nfcTag: NfcTag, activity: Activity): List<View> {
  * @return a list of attribute views according to the given tag object
  */
 fun attributes(tag: Tag, activity: Activity): List<View> {
-   val attributes = mutableListOf<View>()
+    val attributes = mutableListOf<View>()
 
-   attributes.add(
-      inflate(R.layout.attribute_headline_details, activity))
+    attributes.add(
+        inflate(R.layout.attribute_headline_details, activity))
 
-   extractId(tag)?.let {
-      attributes.add(
-         view(it, R.layout.attribute_id, activity))
-   }
-   extractTechnologies(tag)?.let {
-      attributes.add(
-         view(it, R.layout.attribute_technologies, activity))
-   }
-   extractDataFormat(tag, activity)?.let {
-      attributes.add(
-         view(it, R.layout.attribute_data_format, activity))
-   }
-   extractSize(tag, activity)?.let {
-      attributes.add(
-         view(it, R.layout.attribute_memory_information, activity))
-   }
-   extractTagType(tag)?.let {
-      attributes.add(
-         view(it, R.layout.attribute_tag_type, activity))
-   }
-   extractATQA(tag)?.let {
-      attributes.add(
-         view(it, R.layout.attribute_atqa, activity))
-   }
-   extractSAK(tag)?.let {
-      attributes.add(
-         view(it, R.layout.attribute_sak, activity))
-   }
-   extractWritable(tag, activity)?.let {
-      attributes.add(
-         view(it, R.layout.attribute_editable, activity))
-   }
-   extractCanBeMadeReadOnly(tag, activity)?.let {
-      attributes.add(
-         view(it, R.layout.attribute_read_only, activity))
-   }
+    extractId(tag)?.let {
+        attributes.add(
+            view(it, R.layout.attribute_id, activity))
+    }
+    extractTechnologies(tag)?.let {
+        attributes.add(
+            view(it, R.layout.attribute_technologies, activity))
+    }
+    extractDataFormat(tag, activity)?.let {
+        attributes.add(
+            view(it, R.layout.attribute_data_format, activity))
+    }
+    extractSize(tag, activity)?.let {
+        attributes.add(
+            view(it, R.layout.attribute_memory_information, activity))
+    }
+    extractTagType(tag)?.let {
+        attributes.add(
+            view(it, R.layout.attribute_tag_type, activity))
+    }
+    extractATQA(tag)?.let {
+        attributes.add(
+            view(it, R.layout.attribute_atqa, activity))
+    }
+    extractSAK(tag)?.let {
+        attributes.add(
+            view(it, R.layout.attribute_sak, activity))
+    }
+    extractWritable(tag, activity)?.let {
+        attributes.add(
+            view(it, R.layout.attribute_editable, activity))
+    }
+    extractCanBeMadeReadOnly(tag, activity)?.let {
+        attributes.add(
+            view(it, R.layout.attribute_read_only, activity))
+    }
 
-   return attributes
+    return attributes
 }
 
 fun extractId(tag: Tag): String? {
-   return when {
-      tag.id.isNotEmpty() -> tag.id.toHexString()
-      else -> null
-   }
+    return when {
+        tag.id.isNotEmpty() -> tag.id.toHexString()
+        else -> null
+    }
 }
 
 fun extractTechnologies(tag: Tag): String? {
-   return when {
-      tag.techList.isNotEmpty() -> tag.techList.joinToString(separator = ", ") {
-         it.split(".").last()
-      }
-      else -> null
-   }
+    return when {
+        tag.techList.isNotEmpty() -> tag.techList.joinToString(separator = ", ") {
+            it.split(".").last()
+        }
+        else -> null
+    }
 }
 
 fun extractDataFormat(tag: Tag, activity: Activity): String? {
-   fun beautifyFormat(format: String): String {
-      return when (format) {
-          Ndef.NFC_FORUM_TYPE_1 -> activity.getString(R.string.org_nfcorum_ndef_type1)
-          Ndef.NFC_FORUM_TYPE_2 -> activity.getString(R.string.org_nfcorum_ndef_type2)
-          Ndef.NFC_FORUM_TYPE_3 -> activity.getString(R.string.org_nfcorum_ndef_type3)
-          Ndef.NFC_FORUM_TYPE_4 -> activity.getString(R.string.org_nfcorum_ndef_type4)
-          Ndef.MIFARE_CLASSIC -> activity.getString(R.string.com_nxp_ndef_mifareclassic)
-          "com.nxp.ndef.icodesli" -> activity.getString(R.string.com_nxp_ndef_icodesli)
-          "android.ndef.unknown" -> activity.getString(R.string.android_ndef_unknown)
-          else -> activity.getString(R.string.android_ndef_unknown)
-      }
-   }
+    fun beautifyFormat(format: String): String {
+        return when (format) {
+            Ndef.NFC_FORUM_TYPE_1 -> activity.getString(R.string.org_nfcorum_ndef_type1)
+            Ndef.NFC_FORUM_TYPE_2 -> activity.getString(R.string.org_nfcorum_ndef_type2)
+            Ndef.NFC_FORUM_TYPE_3 -> activity.getString(R.string.org_nfcorum_ndef_type3)
+            Ndef.NFC_FORUM_TYPE_4 -> activity.getString(R.string.org_nfcorum_ndef_type4)
+            Ndef.MIFARE_CLASSIC -> activity.getString(R.string.com_nxp_ndef_mifareclassic)
+            "com.nxp.ndef.icodesli" -> activity.getString(R.string.com_nxp_ndef_icodesli)
+            "android.ndef.unknown" -> activity.getString(R.string.android_ndef_unknown)
+            else -> activity.getString(R.string.android_ndef_unknown)
+        }
+    }
 
-   return when {
-      Ndef.get(tag) != null -> beautifyFormat(Ndef.get(tag).type)
-      else -> null
-   }
+    return when {
+        Ndef.get(tag) != null -> beautifyFormat(Ndef.get(tag).type)
+        else -> null
+    }
 }
 
 fun extractATQA(tag: Tag): String? {
-   return when {
-      NfcA.get(tag) != null -> NfcA.get(tag).atqa.toHexString()
-      else -> null
-   }
+    return when {
+        NfcA.get(tag) != null -> NfcA.get(tag).atqa.toHexString()
+        else -> null
+    }
 }
 
 fun extractSAK(tag: Tag): String? {
-   return when {
-      NfcA.get(tag) != null -> NfcA.get(tag).sak.toString()
-      else -> null
-   }
+    return when {
+        NfcA.get(tag) != null -> NfcA.get(tag).sak.toString()
+        else -> null
+    }
 }
 
 fun extractTagType(tag: Tag): String? {
-   return null // TODO ?
+    return null // TODO ?
 }
 
 fun extractSize(tag: Tag, activity: Activity): String? {
-   return when {
-      Ndef.get(tag) != null -> "${Ndef.get(tag).maxSize} ${activity.getString(R.string.bytes)}"
-      else -> null
-   }
+    return when {
+        Ndef.get(tag) != null -> "${Ndef.get(tag).maxSize} ${activity.getString(R.string.bytes)}"
+        else -> null
+    }
 }
 
 fun extractWritable(tag: Tag, activity: Activity): String? {
-   return if (Ndef.get(tag) != null)
-      when (Ndef.get(tag).isWritable) {
-         true -> activity.getString(R.string.writable)
-         false -> activity.getString(R.string.not_writable)
-      }
-   else
-      null
+    return if (Ndef.get(tag) != null)
+        when (Ndef.get(tag).isWritable) {
+            true -> activity.getString(R.string.writable)
+            false -> activity.getString(R.string.not_writable)
+        }
+    else
+        null
 }
 
 fun extractCanBeMadeReadOnly(tag: Tag, activity: Activity): String? {
-   return if (Ndef.get(tag) != null)
-      when (Ndef.get(tag).canMakeReadOnly()) {
-         true -> activity.getString(R.string.yes)
-         false -> activity.getString(R.string.no)
-      }
-   else
-      null
+    return if (Ndef.get(tag) != null)
+        when (Ndef.get(tag).canMakeReadOnly()) {
+            true -> activity.getString(R.string.yes)
+            false -> activity.getString(R.string.no)
+        }
+    else
+        null
 }
 
 fun inflate(layoutId: Int, activity: Activity) : View {
-   return LayoutInflater.from(activity).inflate(layoutId, null)
+    return LayoutInflater.from(activity).inflate(layoutId, null)
 }
 
 private fun view(detail: String, layoutId: Int, activity: Activity): View {
-   return LayoutInflater.from(activity).inflate(layoutId, null).apply {
-      findViewById<TextView>(R.id.text_detail).text = detail
-   }
+    return LayoutInflater.from(activity).inflate(layoutId, null).apply {
+        findViewById<TextView>(R.id.text_detail).text = detail
+    }
 }
 
 fun dp(dp: Float, context: Context): Int {
-   return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.resources.displayMetrics)
-      .toInt()
+    return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.resources.displayMetrics)
+        .toInt()
 }
 
 fun toSaveTag(name: String, tag: Tag, ndefMessage: NdefMessage, activity: Activity): NfcTag {
-   return NfcTag(
-       name = name,
-       ndefMessage = ndefMessage,
-       tagId = extractId(tag),
-       technologies = extractTechnologies(tag),
-       dataFormat = extractDataFormat(tag, activity),
-       memorySpace = extractSize(tag, activity),
-       atqa = extractATQA(tag),
-       sak = extractSAK(tag),
-       editable = extractWritable(tag, activity),
-       canMakeReadOnly = extractCanBeMadeReadOnly(tag, activity)
-   )
+    return NfcTag(
+        name = name,
+        ndefMessage = ndefMessage,
+        tagId = extractId(tag),
+        technologies = extractTechnologies(tag),
+        dataFormat = extractDataFormat(tag, activity),
+        memorySpace = extractSize(tag, activity),
+        atqa = extractATQA(tag),
+        sak = extractSAK(tag),
+        editable = extractWritable(tag, activity),
+        canMakeReadOnly = extractCanBeMadeReadOnly(tag, activity)
+    )
 }
 
 fun displayError(errorMessage: String, view: TextView) {
-   view.requestFocus()
-   view.error = errorMessage
+    view.requestFocus()
+    view.error = errorMessage
 }
 
 /**
@@ -290,60 +290,60 @@ fun displayError(errorMessage: String, view: TextView) {
  * @see shanetully https://www.shanetully.com/2012/12/writing-custom-data-to-nfc-tags-with-android-example/
  */
 fun writeTag(context: Context, tag: Tag, message: NdefMessage): Boolean {
-   try {
-      val ndef = Ndef.get(tag)
-      if (ndef != null) { // tag is empty
-         ndef.connect()
+    try {
+        val ndef = Ndef.get(tag)
+        if (ndef != null) { // tag is empty
+            ndef.connect()
 
-         if (!ndef.isWritable) {
-            showAlertDialog(R.layout.dialog_no_write, R.string.nfc_tag_write_failed, context)
-            return false
-         }
+            if (!ndef.isWritable) {
+                showAlertDialog(R.layout.dialog_no_write, R.string.nfc_tag_write_failed, context)
+                return false
+            }
 
-         val size = message.toByteArray().size
-         if (ndef.maxSize < size) {
-            showAlertDialog(
-               R.layout.dialog_not_enough_storage,
-               R.string.nfc_tag_write_failed,
-               context
-            )
-            return false
-         }
+            val size = message.toByteArray().size
+            if (ndef.maxSize < size) {
+                showAlertDialog(
+                    R.layout.dialog_not_enough_storage,
+                    R.string.nfc_tag_write_failed,
+                    context
+                )
+                return false
+            }
 
-         try {
-            ndef.writeNdefMessage(message)
+            try {
+                ndef.writeNdefMessage(message)
 
-            showAlertDialog(R.layout.dialog_write_successful, R.string.success, context)
-            return true
-         } catch (tle: TagLostException) {
-            showAlertDialog(
-               R.layout.dialog_write_tag_disconnected,
-               R.string.nfc_tag_write_failed,
-               context
-            )
-         }
-      } else { // tag must be formatted
-         val format = NdefFormatable.get(tag)
-         try {
-            format.connect()
-            format.format(message)
+                showAlertDialog(R.layout.dialog_write_successful, R.string.success, context)
+                return true
+            } catch (tle: TagLostException) {
+                showAlertDialog(
+                    R.layout.dialog_write_tag_disconnected,
+                    R.string.nfc_tag_write_failed,
+                    context
+                )
+            }
+        } else { // tag must be formatted
+            val format = NdefFormatable.get(tag)
+            try {
+                format.connect()
+                format.format(message)
 
-            showAlertDialog(R.layout.dialog_write_successful, R.string.success, context)
-            return true
-         } catch (tle: TagLostException) {
-            showAlertDialog(
-               R.layout.dialog_write_tag_disconnected,
-               R.string.nfc_tag_write_failed,
-               context
-            )
-         }
-      }
-   } catch (ex: Exception) {
-      showAlertDialog(
-         R.layout.dialog_write_failed_unknown,
-         R.string.nfc_tag_write_failed,
-         context
-      )
-   }
-   return false
+                showAlertDialog(R.layout.dialog_write_successful, R.string.success, context)
+                return true
+            } catch (tle: TagLostException) {
+                showAlertDialog(
+                    R.layout.dialog_write_tag_disconnected,
+                    R.string.nfc_tag_write_failed,
+                    context
+                )
+            }
+        }
+    } catch (ex: Exception) {
+        showAlertDialog(
+            R.layout.dialog_write_failed_unknown,
+            R.string.nfc_tag_write_failed,
+            context
+        )
+    }
+    return false
 }
