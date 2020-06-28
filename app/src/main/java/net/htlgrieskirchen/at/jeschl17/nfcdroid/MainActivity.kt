@@ -145,19 +145,23 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("MissingSuperCall")
     public override fun onNewIntent(intent: Intent) {
-        val tagFromIntent: Tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG)
+        val tagFromIntent = intent.getParcelableExtra<Tag>(NfcAdapter.EXTRA_TAG)
 
-        // Switch to scan tab and modify scan fragment
-        scanFragment.rawMessage = null
-        intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)?.also { rawMessages ->
-            val messages: List<NdefMessage> = rawMessages.map { it as NdefMessage }
-            scanFragment.rawMessage = messages.first()
+        if (tagFromIntent != null) {
+            // Switch to scan tab and modify scan fragment
+            scanFragment.rawMessage = null
+            intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)?.also { rawMessages ->
+                val messages: List<NdefMessage> = rawMessages.map { it as NdefMessage }
+                scanFragment.rawMessage = messages.first()
+            }
+            scanFragment.tag = tagFromIntent
+            scanFragment.mode = ScanFragment.Mode.DETAIL
+            switchToTabScan()
+
+            Log.i(TAG, "caught NFC intent: $tagFromIntent")
+        } else {
+            super.onNewIntent(intent)
         }
-        scanFragment.tag = tagFromIntent
-        scanFragment.mode = ScanFragment.Mode.DETAIL
-        switchToTabScan()
-
-        Log.i(TAG, "caught NFC intent: $tagFromIntent")
     }
 
     override fun onBackPressed() {
