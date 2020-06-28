@@ -1,5 +1,6 @@
 package net.htlgrieskirchen.at.jeschl17.nfcdroid.ui.tags
 
+import android.app.AlertDialog
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
@@ -23,6 +24,8 @@ class TagDetailsActivity : AppCompatActivity() {
     private lateinit var pendingIntent: PendingIntent
     private var nfcManager: NfcManager? = null
     private var nfcAdapter: NfcAdapter? = null
+
+    private var tapAgainstPhoneDialog: AlertDialog? = null
 
     lateinit var adapter: GenericAdapter
     private val items = mutableListOf<View>()
@@ -48,7 +51,9 @@ class TagDetailsActivity : AppCompatActivity() {
 
         // Initialize "Write To Tag" Button
         button_write_to_tag.setOnClickListener {
-            showAlertDialog(R.layout.dialog_tap_tag_against_phone, R.string.write_nfc, this)
+            tapAgainstPhoneDialog = showAlertDialog(R.layout.dialog_tap_tag_against_phone,
+                R.string.write_nfc,
+                this)
             dataToWrite = saveTag.ndefMessage
         }
 
@@ -73,6 +78,7 @@ class TagDetailsActivity : AppCompatActivity() {
 
         if (tagFromIntent != null) {
             if (dataToWrite != null) {
+                tapAgainstPhoneDialog?.dismiss()
                 writeTag(this, tagFromIntent, dataToWrite!!)
                 dataToWrite = null
             }

@@ -17,13 +17,14 @@ import net.htlgrieskirchen.at.jeschl17.nfcdroid.R
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.db.NfcTag
 import java.lang.Exception
 
-fun showAlertDialog(viewId: Int, titleId: Int, context: Context) {
-    AlertDialog.Builder(context)
+fun showAlertDialog(viewId: Int, titleId: Int, context: Context): AlertDialog {
+    val dialog = AlertDialog.Builder(context)
         .setTitle(titleId)
         .setView(viewId)
         .setPositiveButton("Ok", null)
         .create()
-        .show()
+    dialog.show()
+    return dialog
 }
 
 /**
