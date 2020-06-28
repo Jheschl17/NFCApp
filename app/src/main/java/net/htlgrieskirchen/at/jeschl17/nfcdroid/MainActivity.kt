@@ -143,7 +143,6 @@ class MainActivity : AppCompatActivity() {
         nfcAdapter?.enableForegroundDispatch(this, pendingIntent, intentFiltersArray, null)
     }
 
-    @SuppressLint("MissingSuperCall")
     public override fun onNewIntent(intent: Intent) {
         val tagFromIntent = intent.getParcelableExtra<Tag>(NfcAdapter.EXTRA_TAG)
 
