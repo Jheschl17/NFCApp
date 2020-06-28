@@ -54,6 +54,7 @@ class ScanFragment : Fragment() {
             // (name is not empty or already used and there is at least one ndef record)
             if (rawMessage == null) {
                 displayError(resources.getString(R.string.tag_must_not_be_empty), layout.button_save_tag)
+                displayError(resources.getString(R.string.tag_must_not_be_empty), layout.text_button_error)
                 return@setOnClickListener
             }
             if (tagName.isEmpty()) {
@@ -111,8 +112,8 @@ class ScanFragment : Fragment() {
         this.attributes.addAll(attributes)
 
         this.views.clear()
-        this.views.addAll(this.attributes)
         this.views.addAll(this.messages)
+        this.views.addAll(this.attributes)
 
         adapter.notifyDataSetChanged()
     }
