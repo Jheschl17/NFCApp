@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.tags.TagDetails"
+            android:name=".ui.tags.TagDetailsActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.tags.CustomProfileActivity"

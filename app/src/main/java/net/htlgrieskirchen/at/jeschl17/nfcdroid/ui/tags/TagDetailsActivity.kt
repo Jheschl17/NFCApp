@@ -11,7 +11,7 @@ import net.htlgrieskirchen.at.jeschl17.nfcdroid.util.attributes
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.util.records
 
 
-class TagDetails : AppCompatActivity() {
+class TagDetailsActivity : AppCompatActivity() {
 
     lateinit var adapter: GenericAdapter
     private val items = mutableListOf<View>()
@@ -21,7 +21,7 @@ class TagDetails : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tag_details)
 
-        val saveTag = intent.getSerializableExtra("saveTag") as NfcTag
+        val saveTag = intent.getParcelableExtra<NfcTag>("saveTag")
 
         text_tag_name.text = saveTag.name
         items.addAll(attributes(saveTag, this))

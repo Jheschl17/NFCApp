@@ -2,11 +2,14 @@ package net.htlgrieskirchen.at.jeschl17.nfcdroid.db
 
 import android.content.Context
 import android.nfc.NdefMessage
+import android.os.Parcelable
 import androidx.room.*
+import kotlinx.android.parcel.Parcelize
 import java.io.Serializable
 
 
 @Entity(tableName = "nfc_tag")
+@Parcelize
 class NfcTag(
     @PrimaryKey val name: String,
     @ColumnInfo(name = "ndef_message", typeAffinity = ColumnInfo.BLOB) val ndefMessage: NdefMessage?,
@@ -17,7 +20,7 @@ class NfcTag(
     @ColumnInfo(name = "atqa") val atqa: String?,
     @ColumnInfo(name = "sak") val sak: String?,
     @ColumnInfo(name = "editable") val editable: String?,
-    @ColumnInfo(name = "can_make_read_only") val canMakeReadOnly: String?) : Serializable
+    @ColumnInfo(name = "can_make_read_only") val canMakeReadOnly: String?) : Serializable, Parcelable
 
 @Dao
 interface NfcTagDao {

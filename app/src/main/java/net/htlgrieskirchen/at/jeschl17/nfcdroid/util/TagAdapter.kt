@@ -2,6 +2,7 @@ package net.htlgrieskirchen.at.jeschl17.nfcdroid.util
 
 import android.app.Activity
 import android.content.Intent
+import android.os.Parcelable
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
@@ -9,7 +10,7 @@ import kotlinx.android.synthetic.main.tag.view.*
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.R
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.db.AppDatabase
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.db.NfcTag
-import net.htlgrieskirchen.at.jeschl17.nfcdroid.ui.tags.TagDetails
+import net.htlgrieskirchen.at.jeschl17.nfcdroid.ui.tags.TagDetailsActivity
 
 class TagAdapter(
     private val activity: Activity
@@ -38,7 +39,8 @@ class TagAdapter(
             text_technologies.text = item.technologies
 
             setOnClickListener {
-                val intent = Intent(activity, TagDetails::class.java).putExtra("saveTag", item)
+                val intent = Intent(activity, TagDetailsActivity::class.java)
+                    .putExtra("saveTag", item as Parcelable)
                 activity.startActivity(intent)
             }
         }
