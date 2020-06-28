@@ -149,6 +149,7 @@ class MainActivity : AppCompatActivity() {
         val tagFromIntent: Tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG)
 
         // Switch to scan tab and modify scan fragment
+        scanFragment.rawMessage = null
         intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)?.also { rawMessages ->
             val messages: List<NdefMessage> = rawMessages.map { it as NdefMessage }
             scanFragment.rawMessage = messages.first()
