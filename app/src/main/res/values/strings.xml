@@ -82,4 +82,6 @@
     <string name="name_must_be_unique">There already exists a Tag with this name</string>
     <string name="tag_must_not_be_empty">A Tag must contain data in order to be saved</string>
     <string name="no_data_found">No data found</string>
+    <string name="tag_number_of_records">Number of records:</string>
+    <string name="tag_size">Size:</string>
 </resources>

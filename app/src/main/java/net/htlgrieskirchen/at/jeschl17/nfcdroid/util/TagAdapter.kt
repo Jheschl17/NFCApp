@@ -35,8 +35,8 @@ class TagAdapter(
             val item = getItem(position)
 
             text_name.text = item.name
-            text_id.text = item.tagId
-            text_technologies.text = item.technologies
+            text_num_records.text = item.ndefMessage.records.size.toString()
+            text_size.text = "${calculateSize(item.ndefMessage.toByteArray())} byte"
 
             setOnClickListener {
                 val intent = Intent(activity, TagDetailsActivity::class.java)

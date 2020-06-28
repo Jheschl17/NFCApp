@@ -270,6 +270,10 @@ fun displayError(errorMessage: String, view: TextView) {
     view.error = errorMessage
 }
 
+fun calculateSize(data: ByteArray): Int {
+    return data.size * 8
+}
+
 /**
  * Writes the provided message to to provided tag.
  *
