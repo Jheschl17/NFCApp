@@ -1,9 +1,11 @@
 package net.htlgrieskirchen.at.jeschl17.nfcdroid.ui.tags
 
+import android.content.Context
 import android.nfc.NdefMessage
 import android.nfc.NdefRecord
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.acticvity_custom_profile.*
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.R
@@ -30,6 +32,12 @@ class CustomProfileActivity : AppCompatActivity() {
         adapter = CustomProfileNdefAdapter(records, this, View.OnClickListener {
             records.add(NdefRecord.createTextRecord(null, "some textidabdidu"))
             adapter.notifyDataSetChanged()
+
+            // Hide keyboard
+            this@CustomProfileActivity.currentFocus?.let { v ->
+                val imm = this@CustomProfileActivity.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+                imm?.hideSoftInputFromWindow(v.windowToken, 0)
+            }
         })
         list.adapter = adapter
         adapter.notifyDataSetChanged()
