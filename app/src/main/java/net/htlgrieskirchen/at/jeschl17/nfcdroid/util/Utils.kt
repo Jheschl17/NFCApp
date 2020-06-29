@@ -53,7 +53,7 @@ fun records(rawRecords: Array<NdefRecord>?, activity: Activity): List<View> {
 }
 
 @ExperimentalStdlibApi
-private fun view(message: NdefRecord, activity: Activity): View {
+fun view(message: NdefRecord, activity: Activity): View {
     return LayoutInflater.from(activity).inflate(R.layout.message_ndef, null).apply {
         text_headline.text = message.toMimeType()
         text_detail.text = message.payload.decodeToString()
@@ -250,18 +250,18 @@ fun dp(dp: Float, context: Context): Int {
         .toInt()
 }
 
-fun toSaveTag(name: String, tag: Tag, ndefMessage: NdefMessage, activity: Activity): NfcTag {
+fun toSaveTag(name: String, tag: Tag?, ndefMessage: NdefMessage, activity: Activity): NfcTag {
     return NfcTag(
         name = name,
         ndefMessage = ndefMessage,
-        tagId = extractId(tag),
-        technologies = extractTechnologies(tag),
-        dataFormat = extractDataFormat(tag, activity),
-        memorySpace = extractSize(tag, activity),
-        atqa = extractATQA(tag),
-        sak = extractSAK(tag),
-        editable = extractWritable(tag, activity),
-        canMakeReadOnly = extractCanBeMadeReadOnly(tag, activity)
+        tagId = tag?.let { extractId(it) },
+        technologies = tag?.let { extractTechnologies(it) },
+        dataFormat = tag?.let { extractDataFormat(it, activity) },
+        memorySpace = tag?.let { extractSize(it, activity) },
+        atqa = tag?.let { extractATQA(it) },
+        sak = tag?.let { extractSAK(it) },
+        editable = tag?.let { extractWritable(it, activity) },
+        canMakeReadOnly = tag?.let { extractCanBeMadeReadOnly(it, activity) }
     )
 }
 
