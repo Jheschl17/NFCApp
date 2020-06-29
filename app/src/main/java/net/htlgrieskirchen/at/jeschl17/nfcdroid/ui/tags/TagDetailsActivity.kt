@@ -3,6 +3,7 @@ package net.htlgrieskirchen.at.jeschl17.nfcdroid.ui.tags
 import android.app.AlertDialog
 import android.app.PendingIntent
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.IntentFilter
 import android.nfc.NdefMessage
@@ -51,14 +52,16 @@ class TagDetailsActivity : AppCompatActivity() {
 
         // Initialize "Write To Tag" Button
         button_write_to_tag.setOnClickListener {
-            tapAgainstPhoneDialog = showAlertDialog(R.layout.dialog_tap_tag_against_phone,
-                R.string.write_nfc,
-                this)
             dataToWrite = saveTag.ndefMessage
-        }
-
-        // Initialize "Emulate" Button
-        // TODO
+            tapAgainstPhoneDialog = AlertDialog.Builder(this)
+                .setTitle(R.string.write_nfc)
+                .setView(R.layout.dialog_tap_tag_against_phone)
+                .setNegativeButton(R.string.cancel) { _, _ ->
+                    dataToWrite = null
+                }
+                .create()
+            tapAgainstPhoneDialog?.show()
+       }
 
         // Claim priority over NFC intents
         nfcManager = getSystemService(Context.NFC_SERVICE) as NfcManager?

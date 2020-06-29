@@ -86,4 +86,5 @@
     <string name="tag_size">Size:</string>
     <string name="tap_tag_against_phone">Please tap a NFC Tag against the phone</string>
     <string name="write_nfc">Write data to NFC Tag</string>
+    <string name="cancel">Cancel</string>
 </resources>
