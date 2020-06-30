@@ -9,8 +9,8 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_tags.view.*
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.R
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.db.AppDatabase
-import net.htlgrieskirchen.at.jeschl17.nfcdroid.db.NfcTag
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.db.NfcTagDao
+import net.htlgrieskirchen.at.jeschl17.nfcdroid.ui.tags.custom.CustomProfileActivity
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.util.TagAdapter
 
 /**

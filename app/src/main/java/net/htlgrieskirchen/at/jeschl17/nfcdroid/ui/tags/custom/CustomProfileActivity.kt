@@ -1,6 +1,7 @@
-package net.htlgrieskirchen.at.jeschl17.nfcdroid.ui.tags
+package net.htlgrieskirchen.at.jeschl17.nfcdroid.ui.tags.custom
 
 import android.content.Context
+import android.content.Intent
 import android.nfc.NdefMessage
 import android.nfc.NdefRecord
 import android.os.Bundle
@@ -11,6 +12,7 @@ import kotlinx.android.synthetic.main.acticvity_custom_profile.*
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.R
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.db.AppDatabase
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.db.NfcTagDao
+import net.htlgrieskirchen.at.jeschl17.nfcdroid.ui.tags.CustomProfileNdefAdapter
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.util.displayError
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.util.toSaveTag
 
@@ -25,22 +27,18 @@ class CustomProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.acticvity_custom_profile)
 
+        instance = this
+
         // Initialize database connection
         db = AppDatabase.getInstance(this).nfcTagDao!!
 
         // Initialize list view
-        adapter = CustomProfileNdefAdapter(records,
+        adapter = CustomProfileNdefAdapter(
+            records,
             this,
             View.OnClickListener { // Initialize "Plus Button"
-                records.add(NdefRecord.createTextRecord(null, "some textidabdidu"))
-                adapter.notifyDataSetChanged()
-
-                // Hide keyboard
-                this@CustomProfileActivity.currentFocus?.let { v ->
-                   val imm = this@CustomProfileActivity.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-                   imm?.hideSoftInputFromWindow(v.windowToken, 0)
-            }
-        })
+                startActivity(Intent(this, DataTypeActivity::class.java))
+            })
         list.adapter = adapter
         adapter.notifyDataSetChanged()
 
@@ -74,3 +72,5 @@ class CustomProfileActivity : AppCompatActivity() {
         }
     }
 }
+
+var instance: CustomProfileActivity? = null

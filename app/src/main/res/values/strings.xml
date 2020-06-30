@@ -85,4 +85,20 @@
     <string name="tag_number_of_records">Number of records:</string>
     <string name="tag_size">Size:</string>
     <string name="add_data">Add Data</string>
+    <string name="text">Text</string>
+    <string name="add_plain_text">Add Plain Text to the Tag</string>
+    <string name="website_link">Website Link</string>
+    <string name="add_website_link">Add a Link to a Website to the Tag</string>
+    <string name="android_app">Android App</string>
+    <string name="add_android_app">Add a Link to a Android App to the Tag</string>
+    <string name="contact">Contact</string>
+    <string name="add_contact">Add one of your Contacts to the Tag</string>
+    <string name="location">Location</string>
+    <string name="add_location">Add a Location to the Tag</string>
+    <string name="wifi_network">Wi-Fi Network</string>
+    <string name="add_wifi_network">Add a Wi-Fi Network Configuration to the Tag</string>
+    <string name="bluetooth_connection">Bluetooth Connection</string>
+    <string name="add_bluetooth_connection">Add a Bluetooth connection to the Tag</string>
+    <string name="custom_data">Custom Data</string>
+    <string name="add_custom_data">Add custom Data to the Tag</string>
 </resources>
