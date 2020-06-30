@@ -1,8 +1,13 @@
 package net.htlgrieskirchen.at.jeschl17.nfcdroid.util
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
+import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationManager
 import android.nfc.NdefMessage
 import android.nfc.NdefRecord
 import android.nfc.Tag
@@ -12,6 +17,7 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
+import androidx.core.app.ActivityCompat
 import kotlinx.android.synthetic.main.message_ndef.view.*
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.R
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.db.NfcTag
@@ -342,4 +348,19 @@ fun writeTag(context: Context, tag: Tag, message: NdefMessage): Boolean {
         )
     }
     return false
+}
+
+@SuppressLint("MissingPermission")
+fun getLocation(activity: Activity): Location? {
+    var oldLoc: Location?
+    val locationManager = activity.getSystemService(LocationManager::class.java)
+    while (true) {
+        oldLoc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+        if (oldLoc == null) {
+            continue
+        } else {
+            break
+        }
+    }
+    return oldLoc
 }
