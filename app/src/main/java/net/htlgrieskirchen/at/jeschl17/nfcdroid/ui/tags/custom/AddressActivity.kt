@@ -27,7 +27,7 @@ class AddressActivity : AppCompatActivity() {
             if (location == null) {
                 showAlertDialog(R.layout.dialog_location_failed,
                     R.string.determine_location_failed,
-                    this)
+                    dataTypeActivityInstance!!)
                 this.finish()
                 return@setOnClickListener
             }
