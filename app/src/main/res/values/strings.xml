@@ -111,7 +111,7 @@
     <string name="add_location_address">Add a Location based on an Address to the Tag</string>
     <string name="enter_address">Enter an Address</string>
     <string name="address_hint">711-2880 Nulla St. Mankato Mississippi 96522</string>
-    <string name="could_not_determine_location">Could not determine Location.\n\nAre you connected to the internet?\nDid you enter a valid address?</string>
+    <string name="could_not_determine_location">Could not determine Location\n\nAre you connected to the internet?\nDid you enter a valid address?</string>
     <string name="determine_location_failed">Determining Location failed</string>
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
@@ -119,4 +119,12 @@
     <string name="enter_location">Enter a Location</string>
     <string name="invalid_location">The given Location is not valid</string>
     <string name="invalid_location_headline">Invalid Location</string>
+    <string name="enter_data">Enter your Data</string>
+    <string name="content_type">Content Type:</string>
+    <string name="plain">plain</string>
+    <string name="lowercase_text">text</string>
+    <string name="data_headline">Data:</string>
+    <string name="hello">Hello</string>
+    <string name="error_while_parsing_mime_type">Invalid Data\n\nError while parsing MIME Type</string>
+    <string name="invalid_data">Invalid Data</string>
 </resources>

@@ -1,9 +1,11 @@
 package net.htlgrieskirchen.at.jeschl17.nfcdroid.ui.tags.custom
 
 import android.nfc.NdefRecord
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_text.*
+import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_text.button_cancel
+import kotlinx.android.synthetic.main.activity_text.button_save
+import kotlinx.android.synthetic.main.activity_website_link.*
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.R
 
 class WebsiteLinkActivity : AppCompatActivity() {
@@ -18,7 +20,7 @@ class WebsiteLinkActivity : AppCompatActivity() {
 
         // Initialize save button
         button_save.setOnClickListener {
-            val text = text_latitude.text.toString()
+            val text = text_link.text.toString()
             val record = NdefRecord.createUri(text)
             customProfileActivityInstance?.records?.add(record)
             customProfileActivityInstance?.adapter?.notifyDataSetChanged()

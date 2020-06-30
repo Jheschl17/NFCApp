@@ -12,8 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true" >
-        <activity android:name=".ui.tags.custom.AddressActivity"></activity>
+        android:usesCleartextTraffic="true">
+        <activity android:name=".ui.tags.custom.CustomDataActivity"></activity>
+        <activity android:name=".ui.tags.custom.AddressActivity" />
         <activity android:name=".ui.tags.custom.LocationActivity" />
         <activity android:name=".ui.tags.custom.AndroidAppActivity" />
         <activity android:name=".ui.tags.custom.WebsiteLinkActivity" />

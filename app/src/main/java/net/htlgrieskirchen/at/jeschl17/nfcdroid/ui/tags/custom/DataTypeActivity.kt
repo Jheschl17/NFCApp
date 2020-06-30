@@ -38,6 +38,11 @@ class DataTypeActivity : AppCompatActivity() {
         layout_address.setOnClickListener {
             startActivity(Intent(this, AddressActivity::class.java))
         }
+
+        // Initialize "Custom Data"
+        layout_custom_data.setOnClickListener {
+            startActivity(Intent(this, CustomDataActivity::class.java))
+        }
     }
 }
 
