@@ -18,7 +18,7 @@ class AndroidAppActivity : AppCompatActivity() {
 
         // Initialize save button
         button_save.setOnClickListener {
-            val text = text_record_content.text.toString()
+            val text = text_latitude.text.toString()
             val record = NdefRecord.createUri("android.com:$text")
             customProfileActivityInstance?.records?.add(record)
             customProfileActivityInstance?.adapter?.notifyDataSetChanged()

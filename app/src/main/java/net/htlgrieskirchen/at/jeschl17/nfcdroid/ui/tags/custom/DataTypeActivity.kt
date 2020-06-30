@@ -29,6 +29,11 @@ class DataTypeActivity : AppCompatActivity() {
             startActivity(Intent(this, AndroidAppActivity::class.java))
         }
 
+        // Initialize "Location"
+        layout_location.setOnClickListener {
+            startActivity(Intent(this, LocationActivity::class.java))
+        }
+
         // Initialize "Address"
         layout_address.setOnClickListener {
             startActivity(Intent(this, AddressActivity::class.java))
