@@ -129,4 +129,6 @@
     <string name="invalid_data">Invalid Data</string>
     <string name="update_location">Update Location</string>
     <string name="could_not_get_location">Retrieving location failed\n\nAre you connected?</string>
+    <string name="tap_tag_against_phone">Please tap a NFC Tag against the phone</string>
+    <string name="write_nfc">Write data to NFC Tag</string>
 </resources>
