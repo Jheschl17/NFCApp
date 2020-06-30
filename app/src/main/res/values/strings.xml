@@ -113,8 +113,8 @@
     <string name="address_hint">711-2880 Nulla St. Mankato Mississippi 96522</string>
     <string name="could_not_determine_location">Could not determine Location\n\nAre you connected to the internet?\nDid you enter a valid address?</string>
     <string name="determine_location_failed">Determining Location failed</string>
-    <string name="latitude">Latitude</string>
-    <string name="longitude">Longitude</string>
+    <string name="latitude">Latitude:</string>
+    <string name="longitude">Longitude:</string>
     <string name="example_geo">123.456</string>
     <string name="enter_location">Enter a Location</string>
     <string name="invalid_location">The given Location is not valid</string>
