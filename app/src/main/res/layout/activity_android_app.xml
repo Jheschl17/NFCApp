@@ -73,7 +73,7 @@ tools:context=".ui.tags.custom.TextActivity">
     app:layout_constraintStart_toEndOf="@+id/view2" />
 
     <EditText
-        android:id="@+id/text_latitude"
+        android:id="@+id/text_app_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

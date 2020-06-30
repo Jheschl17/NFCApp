@@ -3,7 +3,10 @@ package net.htlgrieskirchen.at.jeschl17.nfcdroid.ui.tags.custom
 import android.nfc.NdefRecord
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import kotlinx.android.synthetic.main.activity_android_app.*
 import kotlinx.android.synthetic.main.activity_text.*
+import kotlinx.android.synthetic.main.activity_text.button_cancel
+import kotlinx.android.synthetic.main.activity_text.button_save
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.R
 
 class AndroidAppActivity : AppCompatActivity() {
@@ -18,7 +21,7 @@ class AndroidAppActivity : AppCompatActivity() {
 
         // Initialize save button
         button_save.setOnClickListener {
-            val text = text_latitude.text.toString()
+            val text = text_app_name.text.toString()
             val record = NdefRecord.createUri("android.com:$text")
             customProfileActivityInstance?.records?.add(record)
             customProfileActivityInstance?.adapter?.notifyDataSetChanged()
