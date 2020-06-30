@@ -103,4 +103,6 @@
     <string name="add_custom_data">Add custom Data to the Tag</string>
     <string name="cancel">Cancel</string>
     <string name="enter_text">Enter your Text</string>
+    <string name="enter_link">Enter a Link</string>
+    <string name="link_example">http://www.example.com</string>
 </resources>

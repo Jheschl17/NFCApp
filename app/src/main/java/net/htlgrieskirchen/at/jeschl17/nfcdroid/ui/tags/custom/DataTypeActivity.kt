@@ -13,8 +13,14 @@ class DataTypeActivity : AppCompatActivity() {
 
         dataTypeActivityInstance = this
 
+        // Initialize "Text"
         layout_text.setOnClickListener {
             startActivity(Intent(this, TextActivity::class.java))
+        }
+
+        // Initialize "Website Link"
+        layout_website_link.setOnClickListener {
+            startActivity(Intent(this, WebsiteLinkActivity::class.java))
         }
     }
 }
