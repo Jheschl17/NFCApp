@@ -22,6 +22,11 @@ class DataTypeActivity : AppCompatActivity() {
         layout_website_link.setOnClickListener {
             startActivity(Intent(this, WebsiteLinkActivity::class.java))
         }
+
+        // Initialize "Android App"
+        layout_android_app.setOnClickListener {
+            startActivity(Intent(this, AndroidAppActivity::class.java))
+        }
     }
 }
 

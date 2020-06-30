@@ -105,4 +105,6 @@
     <string name="enter_text">Enter your Text</string>
     <string name="enter_link">Enter a Link</string>
     <string name="link_example">http://www.example.com</string>
+    <string name="enter_app">Enter an Apps full Name</string>
+    <string name="android_app_full_name">com.example.app</string>
 </resources>
