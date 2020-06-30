@@ -22,7 +22,7 @@ class AndroidAppActivity : AppCompatActivity() {
         // Initialize save button
         button_save.setOnClickListener {
             val text = text_app_name.text.toString()
-            val record = NdefRecord.createUri("android.com:$text")
+            val record = NdefRecord.createApplicationRecord(text)
             customProfileActivityInstance?.records?.add(record)
             customProfileActivityInstance?.adapter?.notifyDataSetChanged()
             dataTypeActivityInstance?.finish()
