@@ -1,12 +1,10 @@
 package net.htlgrieskirchen.at.jeschl17.nfcdroid.ui.tags.custom
 
-import android.content.Context
 import android.content.Intent
 import android.nfc.NdefMessage
 import android.nfc.NdefRecord
 import android.os.Bundle
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.acticvity_custom_profile.*
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.R
@@ -20,14 +18,14 @@ class CustomProfileActivity : AppCompatActivity() {
 
     private lateinit var db: NfcTagDao
 
-    private val records = mutableListOf<NdefRecord>()
-    private lateinit var adapter: CustomProfileNdefAdapter
+    val records = mutableListOf<NdefRecord>()
+    lateinit var adapter: CustomProfileNdefAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.acticvity_custom_profile)
 
-        instance = this
+        customProfileActivityInstance = this
 
         // Initialize database connection
         db = AppDatabase.getInstance(this).nfcTagDao!!
@@ -73,4 +71,4 @@ class CustomProfileActivity : AppCompatActivity() {
     }
 }
 
-var instance: CustomProfileActivity? = null
+var customProfileActivityInstance: CustomProfileActivity? = null

@@ -101,4 +101,6 @@
     <string name="add_bluetooth_connection">Add a Bluetooth connection to the Tag</string>
     <string name="custom_data">Custom Data</string>
     <string name="add_custom_data">Add custom Data to the Tag</string>
+    <string name="cancel">Cancel</string>
+    <string name="enter_text">Enter your Text</string>
 </resources>

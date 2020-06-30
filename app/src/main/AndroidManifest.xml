@@ -11,7 +11,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.tags.custom.DataTypeActivity"></activity>
+        <activity android:name=".ui.tags.custom.WiFiNetworkActivity"></activity>
+        <activity android:name=".ui.tags.custom.LocationActivity" />
+        <activity android:name=".ui.tags.custom.ContactActivity" />
+        <activity android:name=".ui.tags.custom.AndroidAppActivity" />
+        <activity android:name=".ui.tags.custom.WebsiteLinkActivity" />
+        <activity android:name=".ui.tags.custom.TextActivity" />
+        <activity android:name=".ui.tags.custom.DataTypeActivity" />
         <activity
             android:name=".ui.tags.TagDetailsActivity"
             android:screenOrientation="portrait" />
