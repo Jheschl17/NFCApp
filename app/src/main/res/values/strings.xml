@@ -107,4 +107,10 @@
     <string name="link_example">http://www.example.com</string>
     <string name="enter_app">Enter an Apps full Name</string>
     <string name="android_app_full_name">com.example.app</string>
+    <string name="address">Address</string>
+    <string name="add_location_address">Add a Location based on an Address to the Tag</string>
+    <string name="enter_address">Enter an Address</string>
+    <string name="address_hint">711-2880 Nulla St. Mankato Mississippi 96522</string>
+    <string name="could_not_determine_location">Could not determine Location</string>
+    <string name="determine_location_failed">Determining Location failed</string>
 </resources>

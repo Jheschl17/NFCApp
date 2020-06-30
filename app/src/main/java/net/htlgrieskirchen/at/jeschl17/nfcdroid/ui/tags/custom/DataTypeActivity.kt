@@ -1,6 +1,7 @@
 package net.htlgrieskirchen.at.jeschl17.nfcdroid.ui.tags.custom
 
 import android.content.Intent
+import android.location.Address
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_data_type.*
@@ -26,6 +27,11 @@ class DataTypeActivity : AppCompatActivity() {
         // Initialize "Android App"
         layout_android_app.setOnClickListener {
             startActivity(Intent(this, AndroidAppActivity::class.java))
+        }
+
+        // Initialize "Address"
+        layout_address.setOnClickListener {
+            startActivity(Intent(this, AddressActivity::class.java))
         }
     }
 }
