@@ -37,12 +37,6 @@ class TagAdapter(
             text_name.text = item.name
             text_num_records.text = item.ndefMessage.records.size.toString()
             text_size.text = "${calculateSize(item.ndefMessage.toByteArray())} byte"
-
-            setOnClickListener {
-                val intent = Intent(activity, TagDetailsActivity::class.java)
-                    .putExtra("saveTag", item as Parcelable)
-                activity.startActivity(intent)
-            }
         }
     }
 

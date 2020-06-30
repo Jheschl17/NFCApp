@@ -2,10 +2,11 @@ package net.htlgrieskirchen.at.jeschl17.nfcdroid.ui.tags
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
+import android.view.*
+import android.widget.AdapterView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_tags.view.*
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.R
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.db.AppDatabase
@@ -40,12 +41,35 @@ class TagsFragment : Fragment() {
         adapter = TagAdapter(requireActivity())
         layout.list_tags.adapter = adapter
         adapter.notifyDataSetChanged()
+        registerForContextMenu(layout.list_tags)
+        layout.list_tags.setOnItemClickListener { _, _, position, _ ->
+            val name = adapter.getItem(position).name
+            val intent = Intent(activity, TagDetailsActivity::class.java)
+                .putExtra("saveTag", db.nfcTagByName(name) as Parcelable)
+            startActivity(intent)
+        }
 
         // Remove text view if there are scanned tags
         if (db.getAll().isNotEmpty())
             layout.text_no_nfc_tags_yet.visibility = View.GONE
 
         return layout
+    }
+
+    override fun onCreateContextMenu(
+        menu: ContextMenu,
+        v: View,
+        menuInfo: ContextMenu.ContextMenuInfo?
+    ) {
+        requireActivity().menuInflater.inflate(R.menu.tag_delete, menu)
+        super.onCreateContextMenu(menu, v, menuInfo)
+    }
+
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        val name = adapter.getItem((item.menuInfo as AdapterView.AdapterContextMenuInfo).position).name
+        db.deleteByName(name)
+        adapter.notifyDataSetChanged()
+        return true
     }
 
 }

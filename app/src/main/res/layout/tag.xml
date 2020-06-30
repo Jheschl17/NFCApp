@@ -6,7 +6,9 @@
     android:layout_height="120dp"
     android:layout_margin="8dp"
     android:background="#D3D3D3"
-    android:padding="8dp">
+    android:padding="8dp"
+    android:focusable="false"
+    android:focusableInTouchMode="false" >
 
     <TextView
         android:id="@+id/text_name"
