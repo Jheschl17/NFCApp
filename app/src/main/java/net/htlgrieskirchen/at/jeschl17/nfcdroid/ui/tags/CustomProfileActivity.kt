@@ -29,14 +29,16 @@ class CustomProfileActivity : AppCompatActivity() {
         db = AppDatabase.getInstance(this).nfcTagDao!!
 
         // Initialize list view
-        adapter = CustomProfileNdefAdapter(records, this, View.OnClickListener {
-            records.add(NdefRecord.createTextRecord(null, "some textidabdidu"))
-            adapter.notifyDataSetChanged()
+        adapter = CustomProfileNdefAdapter(records,
+            this,
+            View.OnClickListener { // Initialize "Plus Button"
+                records.add(NdefRecord.createTextRecord(null, "some textidabdidu"))
+                adapter.notifyDataSetChanged()
 
-            // Hide keyboard
-            this@CustomProfileActivity.currentFocus?.let { v ->
-                val imm = this@CustomProfileActivity.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-                imm?.hideSoftInputFromWindow(v.windowToken, 0)
+                // Hide keyboard
+                this@CustomProfileActivity.currentFocus?.let { v ->
+                   val imm = this@CustomProfileActivity.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+                   imm?.hideSoftInputFromWindow(v.windowToken, 0)
             }
         })
         list.adapter = adapter
