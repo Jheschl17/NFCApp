@@ -13,6 +13,9 @@ import android.nfc.Tag
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import androidx.preference.PreferenceManager
 import kotlinx.android.synthetic.main.activity_tag_details.*
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.R
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.db.NfcTag
@@ -82,7 +85,22 @@ class TagDetailsActivity : AppCompatActivity() {
         if (tagFromIntent != null) {
             if (dataToWrite != null) {
                 tapAgainstPhoneDialog?.dismiss()
-                writeTag(this, tagFromIntent, dataToWrite!!)
+                val success = writeTag(this, tagFromIntent, dataToWrite!!)
+                val showNotification = PreferenceManager.getDefaultSharedPreferences(this)
+                        .getBoolean("switch_preference_display_notifications", true)
+
+                if (success && showNotification) {
+                    var notification = NotificationCompat.Builder(this)
+                        .setSmallIcon(R.drawable.icons8_quill_pen_96)
+                        .setContentTitle(resources.getString(R.string.data_written))
+                        .setContentText(resources.getString(R.string.data_written_detail))
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                        .build()
+
+                    with(NotificationManagerCompat.from(this)) {
+                        notify(1234, notification)
+                    }
+                }
                 dataToWrite = null
             }
         } else {
