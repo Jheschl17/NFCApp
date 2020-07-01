@@ -79,12 +79,12 @@ class LocationActivity : AppCompatActivity() {
             val lat = text_latitude.text.toString().toDoubleOrNull()
             val lon = text_longitude.text.toString().toDoubleOrNull()
 
-            if (lat == null || lon == null) {
-                showAlertDialog(
-                    R.layout.dialog_invalid_location,
-                    R.string.invalid_location_headline,
-                    this
-                )
+            if (lat == null) {
+                text_latitude.error = resources.getString(R.string.please_enter_value)
+                return@setOnClickListener
+            }
+            if (lon == null) {
+                text_longitude.error = resources.getString(R.string.please_enter_value)
                 return@setOnClickListener
             }
 
