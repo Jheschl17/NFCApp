@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.acticvity_custom_profile.*
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.R
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.db.AppDatabase
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.db.NfcTagDao
+import net.htlgrieskirchen.at.jeschl17.nfcdroid.instance
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.ui.tags.CustomProfileNdefAdapter
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.util.displayError
 import net.htlgrieskirchen.at.jeschl17.nfcdroid.util.toSaveTag
@@ -66,6 +67,7 @@ class CustomProfileActivity : AppCompatActivity() {
                 activity = this
             )
             db.insertAll(tag)
+            instance.tagsFragment.adapter.notifyDataSetChanged()
             this.finish()
         }
     }
