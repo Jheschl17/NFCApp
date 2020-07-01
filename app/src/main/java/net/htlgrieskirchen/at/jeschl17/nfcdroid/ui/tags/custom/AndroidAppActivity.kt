@@ -30,9 +30,7 @@ class AndroidAppActivity : AppCompatActivity() {
                 dataTypeActivityInstance?.finish()
                 this.finish()
             } catch (e: Exception) {
-                text_app_name.setError(
-                    resources.getString(R.string.invalid_app_name_headline),
-                    null)
+                text_app_name.error = resources.getString(R.string.invalid_app_name_headline)
             }
         }
     }
