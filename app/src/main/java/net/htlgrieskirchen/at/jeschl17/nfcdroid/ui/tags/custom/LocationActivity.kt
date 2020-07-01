@@ -9,6 +9,7 @@ import android.location.LocationManager
 import android.nfc.NdefRecord
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import kotlinx.android.synthetic.main.activity_location.*
@@ -31,9 +32,10 @@ class LocationActivity : AppCompatActivity() {
                 == PackageManager.PERMISSION_GRANTED
             ) {
                 getSystemService(LocationManager::class.java).requestSingleUpdate(
-                    LocationManager.GPS_PROVIDER,
+                    LocationManager.NETWORK_PROVIDER,
                     object : LocationListener {
                         override fun onLocationChanged(location: Location?) {
+                            Log.d("LocationActivity", "location updated: $location")
                         }
 
                         override fun onStatusChanged(

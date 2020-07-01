@@ -356,7 +356,7 @@ fun getLocation(activity: Activity): Location? {
     var oldLoc: Location?
     val locationManager = activity.getSystemService(LocationManager::class.java)
     while (true) {
-        oldLoc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+        oldLoc = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
         if (oldLoc == null) {
             continue
         } else {
