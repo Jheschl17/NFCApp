@@ -27,9 +27,7 @@ class AddressActivity : AppCompatActivity() {
                 .execute(text)
                 .get()
             if (location == null) {
-                showAlertDialog(R.layout.dialog_location_failed,
-                    R.string.determine_location_failed,
-                    this)
+                text_address.error = resources.getString(R.string.invalid_address)
                 return@setOnClickListener
             }
             val record = NdefRecord.createUri("geo:${location.lat},${location.lon}")

@@ -142,6 +142,7 @@
     <string name="invalid_app_name_headline">Invalid App Name</string>
     <string name="invalid_link">Invalid Link</string>
     <string name="please_enter_value">Please enter a Value</string>
+    <string name="invalid_address">Invalid Address</string>
     <string name="gpl3">GNU GENERAL PUBLIC LICENSE\nVersion 3, 29 June 2007</string>
     <string name="glp3_preamble">Copyright © 2007 Free Software Foundation, Inc. &lt;http://fsf.org/&gt;
         Everyone is permitted to copy and distribute verbatim copies
