@@ -20,12 +20,16 @@ class WebsiteLinkActivity : AppCompatActivity() {
 
         // Initialize save button
         button_save.setOnClickListener {
-            val text = text_link.text.toString()
-            val record = NdefRecord.createUri(text)
-            customProfileActivityInstance?.records?.add(record)
-            customProfileActivityInstance?.adapter?.notifyDataSetChanged()
-            dataTypeActivityInstance?.finish()
-            this.finish()
+            try {
+                val text = text_link.text.toString()
+                val record = NdefRecord.createUri(text)
+                customProfileActivityInstance?.records?.add(record)
+                customProfileActivityInstance?.adapter?.notifyDataSetChanged()
+                dataTypeActivityInstance?.finish()
+                this.finish()
+            } catch (e: Exception) {
+                text_link.error = resources.getString(R.string.invalid_link)
+            }
         }
     }
 }
