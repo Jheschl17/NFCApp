@@ -30,8 +30,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@string/glp3_content"
+                android:text="@string/glp3_preamble"
                 android:typeface="monospace" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:typeface="monospace"
+                android:text="@string/glp3_content_terms" />
         </LinearLayout>
     </ScrollView>
 
