@@ -21,6 +21,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setPreferencesFromResource(R.xml.preferences, rootKey)
 
         findPreference<Preference>(getString(R.string.licenses))?.setOnPreferenceClickListener {
+            val intent = Intent(requireActivity(), LicenseActivity::class.java)
+            startActivity(intent)
             return@setOnPreferenceClickListener true
         }
         findPreference<Preference>(getString(R.string.source_code))?.setOnPreferenceClickListener {
