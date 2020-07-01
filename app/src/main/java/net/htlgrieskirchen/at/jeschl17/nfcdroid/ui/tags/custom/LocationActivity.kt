@@ -79,14 +79,16 @@ class LocationActivity : AppCompatActivity() {
             val lat = text_latitude.text.toString().toDoubleOrNull()
             val lon = text_longitude.text.toString().toDoubleOrNull()
 
+            var ret = false
             if (lat == null) {
                 text_latitude.error = resources.getString(R.string.please_enter_value)
-                return@setOnClickListener
+                ret = true
             }
             if (lon == null) {
                 text_longitude.error = resources.getString(R.string.please_enter_value)
-                return@setOnClickListener
+                ret = true
             }
+            if (ret) return@setOnClickListener
 
             val record = NdefRecord.createUri("geo:$lat,$lon")
             customProfileActivityInstance?.records?.add(record)
