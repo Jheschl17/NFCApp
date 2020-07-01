@@ -15,20 +15,39 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.settings.LicenseActivity"></activity>
-        <activity android:name=".ui.tags.custom.CustomDataActivity" />
-        <activity android:name=".ui.tags.custom.AddressActivity" />
-        <activity android:name=".ui.tags.custom.LocationActivity" />
-        <activity android:name=".ui.tags.custom.AndroidAppActivity" />
-        <activity android:name=".ui.tags.custom.WebsiteLinkActivity" />
-        <activity android:name=".ui.tags.custom.TextActivity" />
-        <activity android:name=".ui.tags.custom.DataTypeActivity" />
+
+        <activity android:name=".ui.settings.LicenseActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.tags.custom.CustomDataActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.tags.custom.AddressActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.tags.custom.LocationActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.tags.custom.AndroidAppActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.tags.custom.WebsiteLinkActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.tags.custom.TextActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.tags.custom.DataTypeActivity"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".ui.tags.TagDetailsActivity"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".ui.tags.custom.CustomProfileActivity"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait">
@@ -38,6 +57,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>
