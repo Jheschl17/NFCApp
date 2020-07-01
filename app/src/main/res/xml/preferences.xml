@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="@string/appearance">
+    <PreferenceCategory android:title="@string/behavior">
 
         <SwitchPreference
-            android:defaultValue="false"
-            android:key="switch_preference_1"
-            android:title="Switch preference" />
+            android:defaultValue="true"
+            android:icon="@drawable/icons8_notification_96"
+            android:key="switch_preference_display_notifications"
+            android:title="@string/display_notifications" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="Preference category">
 
+    <PreferenceCategory android:title="@string/about">
+        <Preference
+            android:title="@string/licenses"
+            app:icon="@drawable/icons8_passport_96"
+            android:key="@string/licenses" />
+        <Preference
+            android:title="@string/source_code"
+            app:icon="@drawable/icons8_code_96"
+            android:key="@string/source_code" />
+        <Preference
+            android:title="@string/icons8"
+            app:icon="@drawable/icons8_icons8"
+            android:key="@string/icons8" />
     </PreferenceCategory>
 </PreferenceScreen>

@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.tags.custom.CustomDataActivity"></activity>
+        <activity android:name=".ui.settings.LicenseActivity"></activity>
+        <activity android:name=".ui.tags.custom.CustomDataActivity" />
         <activity android:name=".ui.tags.custom.AddressActivity" />
         <activity android:name=".ui.tags.custom.LocationActivity" />
         <activity android:name=".ui.tags.custom.AndroidAppActivity" />
